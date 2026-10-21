@@ -1,6 +1,6 @@
 {
-  "name": "4:6 Brew Guide",
-  "short_name": "4:6 Brew",
+  "name": "Brew Guide",
+  "short_name": "Brew Guide",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ead9c7",
