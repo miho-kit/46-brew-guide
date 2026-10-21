@@ -7,7 +7,6 @@
   "theme_color": "#6f4e37",
   "lang": "ja",
   "icons": [
-    {"src":"icon-brew-180.png?v=3","sizes":"180x180","type":"image/png","purpose":"any"},
-    {"src":"icon-brew-512.png?v=3","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {"src":"icon-brew-180.png?v=3","sizes":"180x180","type":"image/png","purpose":"any"}
   ]
 }
