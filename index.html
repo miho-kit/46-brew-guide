@@ -8,12 +8,28 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Brew Guide">
 <title>Brew Guide</title>
-<link rel="manifest" href="manifest.webmanifest?v=3">
-<link rel="apple-touch-icon" sizes="180x180" href="./icon-brew-180.png?v=3">
-<link rel="apple-touch-icon-precomposed" sizes="180x180" href="./icon-brew-180.png?v=3">
+<link rel="manifest" href="manifest.webmanifest?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=4">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="./apple-touch-icon.png?v=4">
 <style>
 :root{--bg:#ead9c7;--panel:#fff9f2;--panel2:#f4e6d8;--ink:#3a2418;--muted:#7a6253;--line:#d4bda9;--accent:#6f4e37;--accent-dark:#4b2f22;--cream:#fffdf9;--radius:15px}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.4}button,input{font:inherit}button{cursor:pointer}.wrap{width:min(100%,680px);margin:0 auto;padding:8px 12px 28px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:4px 4px 0}.heroText{text-align:left;position:relative;z-index:3}.heroArt{display:block;width:min(55vw,215px);height:auto;object-fit:contain;margin:4px auto -18px;position:relative;z-index:2;filter:drop-shadow(0 5px 4px rgba(75,47,34,.07))}.title{font-size:27px;font-weight:800;margin:0;color:var(--accent-dark);letter-spacing:.01em}.sub{font-size:12px;color:var(--muted);margin:2px 0 0}.hero + .section{margin-top:0;padding-top:14px}.section,.timer,details{margin-top:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:11px}.section h2{font-size:14px;margin:0 0 7px;color:var(--accent-dark)}.hint{font-size:11px;color:var(--muted);margin:5px 0 0}.grid3,.tasteRow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.choice{min-height:46px;border:1px solid var(--line);background:var(--cream);border-radius:11px;padding:6px;color:var(--ink)}.choice.active{background:var(--accent);color:#fff;border-color:var(--accent)}.choice.active small{color:#f2e8df}.choice strong{font-size:16px;display:block}.choice small{display:block;font-size:10px;color:var(--muted);margin-top:1px}.roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}.grindText{font-size:12px;color:var(--muted);margin:0}.rangeBox{margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}input[type=range]{width:100%;accent-color:var(--accent);margin:7px 0 2px}.rangeLabels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:3px}.metric{background:var(--panel2);border-radius:11px;padding:7px}.metric span{display:block;color:var(--muted);font-size:9px;line-height:1.2}.metric strong{font-size:18px}.recipe{margin-top:7px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--cream)}.recipeRow{display:grid;grid-template-columns:44px 1fr auto;gap:7px;align-items:center;padding:7px 8px;border-bottom:1px solid var(--line)}.recipeRow:last-child{border-bottom:none}.time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:11px}.pour{font-size:11px}.pour b{font-size:12px}.cum{text-align:right;font-weight:700;font-size:12px}.timerTop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.clock{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums}.timerCard{margin-top:6px;background:var(--panel2);border-radius:11px;padding:11px;text-align:center}.step{font-size:10px;color:var(--muted)}.target{font-size:20px;font-weight:800;margin-top:2px}.next{font-size:11px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent);color:#fff;border-color:var(--accent)}details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--accent-dark);cursor:pointer}.detailsBody{font-size:11px;color:var(--muted);margin-top:6px}.detailsBody p{margin:5px 0}.footer{font-size:10px;color:var(--muted);text-align:center;margin-top:10px}@media(max-width:430px){.summary{grid-template-columns:1fr 1fr}.heroArt{width:min(56vw,205px);margin-bottom:-17px}.title{font-size:25px}}@media(max-width:360px){.title{font-size:22px}.heroArt{width:min(55vw,190px);margin-bottom:-15px}.choice{padding:5px 3px}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.38}
+button,input{font:inherit}button{cursor:pointer}
+.wrap{width:min(100%,680px);margin:0 auto;padding:8px 12px 22px}
+.hero{display:flex;flex-direction:column;align-items:stretch;padding:4px 4px 0}
+.heroText{text-align:left;position:relative;z-index:3}.heroArt{display:block;width:min(55vw,215px);height:auto;object-fit:contain;margin:2px auto -18px;position:relative;z-index:2;filter:drop-shadow(0 5px 4px rgba(75,47,34,.07))}
+.title{font-size:27px;font-weight:800;margin:0;color:var(--accent-dark);letter-spacing:.01em}.sub{font-size:12px;color:var(--muted);margin:2px 0 0}
+.hero + .section{margin-top:0;padding-top:14px}.section,.timer,details{margin-top:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:11px}
+.section h2{font-size:14px;margin:0 0 7px;color:var(--accent-dark)}.hint{font-size:10.5px;color:var(--muted);margin:5px 0 0}
+.grid3,.tasteRow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.choice{min-height:46px;border:1px solid var(--line);background:var(--cream);border-radius:11px;padding:6px;color:var(--ink)}.choice.active{background:var(--accent);color:#fff;border-color:var(--accent)}.choice.active small{color:#f2e8df}.choice strong{font-size:16px;display:block}.choice small{display:block;font-size:10px;color:var(--muted);margin-top:1px}
+.roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}.grindText{font-size:11.5px;color:var(--muted);margin:0}
+.rangeBox{margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}input[type=range]{width:100%;accent-color:var(--accent);margin:7px 0 1px}.rangeHint{font-size:10.5px;color:var(--muted);margin:1px 0 0;text-align:center}
+.recipeHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}.recipeHead h2{margin:0}.recipeMeta{font-weight:800;font-size:17px;color:var(--accent-dark);white-space:nowrap}.recipe{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--cream)}.recipeRow{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line)}.recipeRow:last-child{border-bottom:none}.pourLabel{font-size:12px;font-weight:700}.pourAmount{font-size:17px;font-weight:800;color:var(--accent-dark)}
+.timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.clock{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums}.timerCard{margin-top:6px;background:var(--panel2);border-radius:11px;padding:10px;text-align:center}.step{font-size:10px;color:var(--muted)}.target{font-size:20px;font-weight:800;margin-top:2px}.next{font-size:10.5px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent);color:#fff;border-color:var(--accent)}
+details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--accent-dark);cursor:pointer}.detailsBody{font-size:11px;color:var(--muted);margin-top:6px}.detailsBody p{margin:5px 0}
+@media(max-width:430px){.heroArt{width:min(56vw,205px);margin-bottom:-17px}.title{font-size:25px}}
+@media(max-width:360px){.title{font-size:22px}.heroArt{width:min(55vw,190px);margin-bottom:-15px}.choice{padding:5px 3px}.recipeMeta{font-size:16px}}
 </style>
 </head>
 <body>
@@ -22,27 +38,112 @@
 <div class="heroText"><h1 class="title">Brew Guide</h1><p class="sub">4：6メソッド専用</p></div>
 <img class="heroArt" src="./penguin-hero-transparent.png?v=2" alt="ペンギンが手淹れコーヒーを淹れているイラスト">
 </header>
-<section class="section"><h2>豆量</h2><div class="grid3" id="beanChoices"><button class="choice active" data-beans="15"><strong>15g</strong><small>225g</small></button><button class="choice" data-beans="20"><strong>20g</strong><small>300g</small></button><button class="choice" data-beans="30"><strong>30g</strong><small>450g</small></button></div></section>
-<section class="section"><h2>焙煎度と湯温</h2><div class="grid3" id="roastChoices"><button class="choice roast" data-roast="light"><strong>浅煎り</strong><span class="temp">93℃</span><small>前後</small></button><button class="choice roast active" data-roast="medium"><strong>中煎り</strong><span class="temp">88℃</span><small>前後</small></button><button class="choice roast" data-roast="dark"><strong>深煎り</strong><span class="temp">83℃</span><small>前後</small></button></div></section>
-<section class="section"><h2>粉の挽き具合</h2><p class="grindText">推奨は中粗挽き〜粗挽き。濃くしたいときは少し細かく、薄くしたいときは少し粗くするのが目安です。</p></section>
-<section class="section"><h2>どんな味にしたい？</h2><div class="tasteRow" id="flavorChoices"><button class="choice" data-flavor="sweet">甘く</button><button class="choice active" data-flavor="balanced">バランス</button><button class="choice" data-flavor="bright">明るく</button></div><div class="rangeBox"><div class="rangeTop"><span>前半40％の配分</span><b id="ratioLabel">50：50</b></div><input id="flavorRange" type="range" min="35" max="65" step="1" value="50"><div class="rangeLabels"><span>甘さ方向</span><span>明るさ方向</span></div><p class="hint">1投目を少なくすると甘さ方向、多くすると明るさ・酸の方向へ。</p></div></section>
-<section class="section"><h2>どのくらいの濃さにしたい？</h2><div class="grid3" id="strengthChoices"><button class="choice" data-strength="1"><strong>軽め</strong><small>後半1投</small></button><button class="choice active" data-strength="2"><strong>標準</strong><small>後半2投</small></button><button class="choice" data-strength="3"><strong>しっかり</strong><small>後半3投</small></button></div><p class="hint">1回で注ぐほど軽く、分割回数を増やすほど濃度を出しやすくなります。</p></section>
-<section class="section"><h2>今日のレシピ</h2><div class="summary"><div class="metric"><span>総湯量</span><strong id="totalWater">225g</strong></div><div class="metric"><span>湯温</span><strong id="brewTemp">88℃</strong></div><div class="metric"><span>味わい 40％</span><strong id="frontWater">90g</strong></div><div class="metric"><span>濃度 60％</span><strong id="backWater">135g</strong></div></div><div class="recipe" id="recipe"></div><p class="hint">時間は目安。注いだお湯がほとんど落ち切ってから次へ進みます。</p></section>
-<section class="timer"><div class="timerTop"><div><b>抽出タイマー</b><div class="hint">注湯の目安時刻</div></div><div class="clock" id="clock">0:00</div></div><div class="timerCard"><div class="step" id="timerStep">準備完了</div><div class="target" id="timerTarget">最初の注湯を開始</div><div class="next" id="timerNext">スタートを押してください</div></div><div class="actions"><button class="primary" id="startBtn">抽出スタート</button><button id="pauseBtn" disabled>一時停止</button><button id="resetBtn">リセット</button></div></section>
+
+<section class="section">
+<h2>豆量</h2>
+<div class="grid3" id="beanChoices">
+<button class="choice active" data-beans="15"><strong>15g</strong><small>225g</small></button>
+<button class="choice" data-beans="20"><strong>20g</strong><small>300g</small></button>
+<button class="choice" data-beans="30"><strong>30g</strong><small>450g</small></button>
+</div>
+</section>
+
+<section class="section">
+<h2>焙煎度・湯温</h2>
+<div class="grid3" id="roastChoices">
+<button class="choice roast" data-roast="light"><strong>浅煎り</strong><span class="temp">93℃</span></button>
+<button class="choice roast active" data-roast="medium"><strong>中煎り</strong><span class="temp">88℃</span></button>
+<button class="choice roast" data-roast="dark"><strong>深煎り</strong><span class="temp">83℃</span></button>
+</div>
+</section>
+
+<section class="section">
+<h2>挽き目</h2>
+<p class="grindText">推奨：中粗〜粗挽き　｜　濃く→細かめ　｜　薄く→粗め</p>
+</section>
+
+<section class="section">
+<h2>味</h2>
+<div class="tasteRow" id="flavorChoices">
+<button class="choice" data-flavor="sweet">甘く</button>
+<button class="choice active" data-flavor="balanced">バランス</button>
+<button class="choice" data-flavor="bright">明るく</button>
+</div>
+<div class="rangeBox">
+<div class="rangeTop"><span>前半40％の配分</span><b id="ratioLabel">50：50</b></div>
+<input id="flavorRange" type="range" min="35" max="65" step="1" value="50" aria-label="1投目と2投目の配分">
+<p class="rangeHint">1投目 少なめ＝甘く　／　多め＝明るく</p>
+</div>
+</section>
+
+<section class="section">
+<h2>濃さ</h2>
+<div class="grid3" id="strengthChoices">
+<button class="choice" data-strength="1"><strong>軽め</strong><small>1投</small></button>
+<button class="choice active" data-strength="2"><strong>標準</strong><small>2投</small></button>
+<button class="choice" data-strength="3"><strong>しっかり</strong><small>3投</small></button>
+</div>
+</section>
+
+<section class="section">
+<div class="recipeHead"><h2>今日のレシピ</h2><div class="recipeMeta"><span id="totalWater">225g</span>・<span id="brewTemp">88℃</span></div></div>
+<div class="recipe" id="recipe"></div>
+</section>
+
+<section class="timer">
+<div class="timerTop"><b>抽出タイマー</b><div class="clock" id="clock">0:00</div></div>
+<div class="timerCard">
+<div class="step" id="timerStep">準備完了</div>
+<div class="target" id="timerTarget">最初の注湯を開始</div>
+<div class="next" id="timerNext">スタートを押してください</div>
+</div>
+<div class="actions"><button class="primary" id="startBtn">抽出スタート</button><button id="pauseBtn" disabled>一時停止</button><button id="resetBtn">リセット</button></div>
+</section>
+
 <details><summary>4：6メソッドの考え方</summary><div class="detailsBody"><p><b>1.</b> 粉量の15倍のお湯を使います。20gなら300gです。</p><p><b>2.</b> 総湯量を40％と60％に分けます。</p><p><b>3.</b> 最初の40％を2投に分け、1投目と2投目の量で甘さと明るさを調整します。</p><p><b>4.</b> 残り60％は分割回数で濃度を調整します。</p></div></details>
-<div class="footer">4：6メソッド専用</div>
 </main>
+
 <script>
 const state={beans:15,roast:'medium',flavor:'balanced',strength:2,firstShare:50,elapsed:0,running:false,timer:null,recipe:[]};
-const roastInfo={light:{temp:93},medium:{temp:88},dark:{temp:83}};const times=[0,45,90,130,160];const fmt=n=>Number.isInteger(Math.round(n*10)/10)?String(Math.round(n)):((Math.round(n*10)/10).toFixed(1));const t=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const roastInfo={light:{temp:93},medium:{temp:88},dark:{temp:83}};
+const times=[0,45,90,130,160];
+const fmt=n=>Number.isInteger(Math.round(n*10)/10)?String(Math.round(n)):((Math.round(n*10)/10).toFixed(1));
+const t=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 function active(group,attr,value){$$(group).forEach(b=>b.classList.toggle('active',String(b.dataset[attr])===String(value)))}
-function buildRecipe(){const total=state.beans*15,front=total*.4,back=total*.6,first=front*(state.firstShare/100),second=front-first,each=back/state.strength;const pours=[first,second,...Array(state.strength).fill(each)];let cum=0;state.recipe=pours.map((amount,i)=>{cum+=amount;return{idx:i+1,time:times[i],amount,cum}});$('#totalWater').textContent=fmt(total)+'g';$('#brewTemp').textContent=roastInfo[state.roast].temp+'℃';$('#frontWater').textContent=fmt(front)+'g';$('#backWater').textContent=fmt(back)+'g';$('#ratioLabel').textContent=`${state.firstShare}：${100-state.firstShare}`;$('#recipe').innerHTML=state.recipe.map(r=>`<div class="recipeRow"><div class="time">${t(r.time)}</div><div class="pour"><b>${r.idx}投目</b> +${fmt(r.amount)}g</div><div class="cum">${fmt(r.cum)}gまで</div></div>`).join('');active('#beanChoices .choice','beans',state.beans);active('#roastChoices .choice','roast',state.roast);active('#flavorChoices .choice','flavor',state.flavor);active('#strengthChoices .choice','strength',state.strength);if(!state.running)updateTimerView()}
+function buildRecipe(){
+ const total=state.beans*15,front=total*.4,back=total*.6,first=front*(state.firstShare/100),second=front-first,each=back/state.strength;
+ const pours=[first,second,...Array(state.strength).fill(each)];let cum=0;
+ state.recipe=pours.map((amount,i)=>{cum+=amount;return{idx:i+1,time:times[i],amount,cum}});
+ $('#totalWater').textContent=fmt(total)+'g';
+ $('#brewTemp').textContent=roastInfo[state.roast].temp+'℃';
+ $('#ratioLabel').textContent=`${state.firstShare}：${100-state.firstShare}`;
+ $('#recipe').innerHTML=state.recipe.map(r=>`<div class="recipeRow"><div class="pourLabel">${r.idx}投目</div><div class="pourAmount">${fmt(r.amount)}g</div></div>`).join('');
+ active('#beanChoices .choice','beans',state.beans);active('#roastChoices .choice','roast',state.roast);active('#flavorChoices .choice','flavor',state.flavor);active('#strengthChoices .choice','strength',state.strength);
+ if(!state.running)updateTimerView();
+}
 function flavorFromRange(){state.flavor=state.firstShare<47?'sweet':state.firstShare>53?'bright':'balanced'}
-function updateTimerView(){$('#clock').textContent=t(state.elapsed);if(!state.recipe.length)return;let i=0;for(let x=0;x<state.recipe.length;x++)if(state.elapsed>=state.recipe[x].time)i=x;const current=state.recipe[i],finalTime=state.recipe.length===5?210:state.recipe[state.recipe.length-1].time+45;if(state.elapsed>=finalTime){$('#timerStep').textContent='抽出完了';$('#timerTarget').textContent=fmt(state.recipe[state.recipe.length-1].cum)+'g';$('#timerNext').textContent='ドリッパーを外してください';stop(false);return}$('#timerStep').textContent=`${current.idx}投目`;$('#timerTarget').textContent=`${fmt(current.cum)}gまで注ぐ`;const next=state.recipe[i+1];$('#timerNext').textContent=next?`次の目安 ${t(next.time)} ／ 湯がほぼ落ち切ったら次へ`:'最後の注湯です'}
+function updateTimerView(){
+ $('#clock').textContent=t(state.elapsed);if(!state.recipe.length)return;
+ let i=0;for(let x=0;x<state.recipe.length;x++)if(state.elapsed>=state.recipe[x].time)i=x;
+ const current=state.recipe[i],finalTime=state.recipe[state.recipe.length-1].time+45;
+ if(state.elapsed>=finalTime){$('#timerStep').textContent='抽出完了';$('#timerTarget').textContent='完成';$('#timerNext').textContent='ドリッパーを外してください';stop(false);return}
+ $('#timerStep').textContent=`${current.idx}投目`;
+ $('#timerTarget').textContent=`${fmt(current.amount)}g注ぐ`;
+ const next=state.recipe[i+1];
+ $('#timerNext').textContent=next?`次 ${t(next.time)} ／ 湯がほぼ落ち切ったら次へ`:'最後の注湯です';
+}
 function start(){if(state.running)return;state.running=true;$('#startBtn').disabled=true;$('#pauseBtn').disabled=false;$('#startBtn').textContent='抽出中';state.timer=setInterval(()=>{state.elapsed++;updateTimerView()},1000);updateTimerView()}
 function stop(resume=true){if(state.timer)clearInterval(state.timer);state.timer=null;state.running=false;$('#startBtn').disabled=false;$('#pauseBtn').disabled=true;$('#startBtn').textContent=resume&&state.elapsed>0?'再開':'抽出スタート'}
 function reset(){stop(false);state.elapsed=0;$('#startBtn').textContent='抽出スタート';updateTimerView()}
-$$('#beanChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.beans=+b.dataset.beans;reset();buildRecipe()}));$$('#roastChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.roast=b.dataset.roast;buildRecipe()}));$$('#flavorChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.flavor=b.dataset.flavor;state.firstShare=state.flavor==='sweet'?40:state.flavor==='bright'?60:50;$('#flavorRange').value=state.firstShare;reset();buildRecipe()}));$$('#strengthChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.strength=+b.dataset.strength;reset();buildRecipe()}));$('#flavorRange').addEventListener('input',e=>{state.firstShare=+e.target.value;flavorFromRange();reset();buildRecipe()});$('#startBtn').addEventListener('click',start);$('#pauseBtn').addEventListener('click',()=>stop(true));$('#resetBtn').addEventListener('click',reset);buildRecipe();if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+$$('#beanChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.beans=+b.dataset.beans;reset();buildRecipe()}));
+$$('#roastChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.roast=b.dataset.roast;buildRecipe()}));
+$$('#flavorChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.flavor=b.dataset.flavor;state.firstShare=state.flavor==='sweet'?40:state.flavor==='bright'?60:50;$('#flavorRange').value=state.firstShare;reset();buildRecipe()}));
+$$('#strengthChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.strength=+b.dataset.strength;reset();buildRecipe()}));
+$('#flavorRange').addEventListener('input',e=>{state.firstShare=+e.target.value;flavorFromRange();reset();buildRecipe()});
+$('#startBtn').addEventListener('click',start);$('#pauseBtn').addEventListener('click',()=>stop(true));$('#resetBtn').addEventListener('click',reset);
+buildRecipe();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
 </script>
 </body>
 </html>
