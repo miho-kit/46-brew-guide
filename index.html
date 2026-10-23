@@ -8,9 +8,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Brew Guide">
 <title>Brew Guide</title>
-<link rel="manifest" href="manifest.webmanifest?v=5">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=5">
-<link rel="apple-touch-icon-precomposed" sizes="180x180" href="./apple-touch-icon.png?v=5">
+<link rel="manifest" href="manifest.webmanifest?v=6">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=6">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="./apple-touch-icon.png?v=6">
 <style>
 :root{--bg:#ead9c7;--panel:#fff9f2;--panel2:#f4e6d8;--ink:#3a2418;--muted:#7a6253;--line:#d4bda9;--accent:#6f4e37;--accent-dark:#4b2f22;--accent-deep:#4a2d1f;--cream:#fffdf9;--radius:15px}
 *{box-sizing:border-box}
@@ -23,17 +23,17 @@ button,input{font:inherit}button{cursor:pointer}
 .settingsCard,.recipeCard,.timer,details{margin-top:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:11px}
 .hero + .settingsCard{margin-top:0;padding-top:14px}
 .settingBlock + .settingBlock{border-top:1px solid rgba(212,189,169,.72);margin-top:10px;padding-top:10px}
-.settingBlock h2,.recipeCard h2{font-size:14px;margin:0 0 7px;color:var(--accent-dark)}
+.settingBlock h2{font-size:14px;margin:0 0 7px;color:var(--accent-dark)}
 .grid3,.tasteRow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .choice{min-height:44px;border:1px solid var(--line);background:var(--cream);border-radius:11px;padding:6px;color:var(--ink)}
 .choice.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .choice strong{font-size:16px;display:block}.choice small{display:block;font-size:10px;color:var(--muted);margin-top:1px}.choice.active small{color:#eadfd5}
 .beanChoice{display:flex;align-items:baseline;justify-content:center;gap:7px;min-height:42px}.beanMain{font-size:16px;font-weight:800}.beanWater{font-size:12px;color:var(--muted)}.choice.active .beanWater{color:#e8d8ca}
-.roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}
+.roast{display:flex;align-items:baseline;justify-content:center;gap:6px}.roast strong{font-size:12px;display:inline;margin:0}.roast .temp{font-size:17px;font-weight:800;display:inline;line-height:1;margin:0}
 .grindNote{font-size:10.5px;color:var(--muted);margin:6px 2px 0;text-align:center;white-space:nowrap}
 .rangeBox{margin-top:6px;border:1px solid var(--line);border-radius:11px;padding:6px 8px 5px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11.5px}input[type=range]{width:100%;accent-color:var(--accent);margin:5px 0 0}.rangeHint{font-size:10px;color:var(--muted);margin:0;text-align:center}
 .recipeRowSummary{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}.recipeLabel{font-size:14px;font-weight:800;color:var(--accent-dark)}.recipeStyle{text-align:center;font-size:12.5px;font-weight:700;color:var(--muted)}.recipeMeta{font-size:19px;font-weight:900;color:var(--accent-dark);white-space:nowrap}
-.timer{padding:11px}.timerTitle{font-size:14px;font-weight:800;color:var(--accent-dark);margin-bottom:5px}.timerCard{background:var(--panel2);border-radius:11px;padding:12px 10px 11px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}.pourDots{display:flex;justify-content:center;gap:9px;margin-bottom:7px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}.pourDot.done{background:var(--accent);opacity:.42}.pourDot.current{background:var(--accent);transform:scale(1.42);opacity:1}.timerAmount{font-size:36px;line-height:1;font-weight:900;color:var(--accent-dark);font-variant-numeric:tabular-nums;transition:color .2s ease,transform .2s ease}.clock{margin-top:6px;font-size:20px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;transition:color .22s ease}
+.timer{padding:11px}.timerTitle{font-size:14px;font-weight:800;color:var(--accent-dark);margin-bottom:5px}.timerCard{background:var(--panel2);border-radius:11px;padding:11px 14px 12px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}.pourDots{display:flex;justify-content:center;gap:9px;margin-bottom:8px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}.pourDot.done{background:var(--accent);opacity:.42}.pourDot.current{background:var(--accent);transform:scale(1.42);opacity:1}.timerReadout{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding:0 14px}.timerAmount{font-size:36px;line-height:1;font-weight:900;color:var(--accent-dark);font-variant-numeric:tabular-nums;transition:color .2s ease,transform .2s ease}.clock{font-size:20px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;transition:color .22s ease}
 .timerCard.alert{background:var(--accent);color:#fff;transform:scale(1.015)}.timerCard.alert .pourDot{border-color:#fff}.timerCard.alert .pourDot.done,.timerCard.alert .pourDot.current{background:#fff}.timerCard.alert .timerAmount{color:#fff;animation:amountPop .65s ease}.timerCard.alert .clock{color:#f2e8df}@keyframes amountPop{0%{transform:scale(.82)}45%{transform:scale(1.16)}100%{transform:scale(1)}}
 .actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent-deep);color:#fff;border-color:var(--accent-deep)}
 details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--accent-dark);cursor:pointer}.detailsBody{font-size:11px;color:var(--muted);margin-top:6px}.detailsBody p{margin:5px 0}
@@ -50,15 +50,15 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
  .choice{min-height:40px;border-radius:9px;padding:4px}
  .beanChoice{min-height:38px;gap:6px}.beanMain{font-size:15px}.beanWater{font-size:10.5px}
  .choice strong{font-size:15px}.choice small{font-size:9px;margin-top:0}
- .roast strong{font-size:11px}.roast .temp{font-size:15.5px;margin-top:1px}
+ .roast{gap:5px}.roast strong{font-size:11px}.roast .temp{font-size:15.5px}
  .grindNote{font-size:9.5px;margin-top:5px}
  .rangeBox{margin-top:5px;border-radius:9px;padding:4px 7px 3px}.rangeTop{font-size:11px}input[type=range]{margin:3px 0 0}.rangeHint{font-size:9.5px}
  .recipeRowSummary{gap:8px}.recipeLabel{font-size:13px}.recipeStyle{font-size:11.5px}.recipeMeta{font-size:17px}
- .timer{padding:8px 9px}.timerTitle{font-size:13px;margin-bottom:4px}.timerCard{border-radius:9px;padding:9px 8px 8px}.pourDots{gap:7px;margin-bottom:6px}.pourDot{width:8px;height:8px}.timerAmount{font-size:33px}.clock{font-size:18px;margin-top:5px}
+ .timer{padding:8px 9px}.timerTitle{font-size:13px;margin-bottom:4px}.timerCard{border-radius:9px;padding:9px 8px 10px}.pourDots{gap:7px;margin-bottom:7px}.pourDot{width:8px;height:8px}.timerReadout{padding:0 12px;gap:12px}.timerAmount{font-size:33px}.clock{font-size:18px}
  .actions{gap:5px;margin-top:5px;flex-wrap:nowrap}.actions button{min-height:36px;border-radius:9px;padding:0 8px;font-size:12.5px}.actions .primary{min-width:0}
  details{padding:8px 9px}summary{font-size:12px}.detailsBody{font-size:10px;margin-top:4px}
 }
-@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.grindNote{white-space:normal}.recipeRowSummary{gap:6px}.recipeMeta{font-size:16px}.recipeStyle{font-size:11px}.timerAmount{font-size:31px}.clock{font-size:17px}}
+@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.grindNote{white-space:normal}.recipeRowSummary{gap:6px}.recipeMeta{font-size:16px}.recipeStyle{font-size:11px}.timerReadout{padding:0 8px}.timerAmount{font-size:31px}.clock{font-size:17px}}
 </style>
 </head>
 <body>
@@ -86,9 +86,6 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 </div>
 <p class="grindNote">挽き目：中粗〜粗｜濃く→細め｜薄く→粗め</p>
 </div>
-</section>
-
-<section class="settingsCard">
 <div class="settingBlock">
 <h2>味</h2>
 <div class="tasteRow" id="flavorChoices">
@@ -124,15 +121,13 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 <div class="timerTitle">抽出タイマー</div>
 <div class="timerCard" id="timerCard">
 <div class="pourDots" id="pourDots"></div>
-<div class="timerAmount" id="timerAmount">45g</div>
-<div class="clock" id="clock">0:00</div>
+<div class="timerReadout"><div class="timerAmount" id="timerAmount">45g</div><div class="clock" id="clock">0:00</div></div>
 </div>
 <div class="actions"><button class="primary" id="startBtn">抽出スタート</button><button id="pauseBtn" disabled>一時停止</button><button id="resetBtn">リセット</button></div>
 </section>
 
 <details><summary>4：6メソッドの考え方</summary><div class="detailsBody"><p><b>1.</b> 粉量の15倍のお湯を使います。20gなら300gです。</p><p><b>2.</b> 総湯量を40％と60％に分けます。</p><p><b>3.</b> 最初の40％を2投に分け、1投目と2投目の量で甘さと明るさを調整します。</p><p><b>4.</b> 残り60％は分割回数で濃度を調整します。</p></div></details>
 </main>
-
 <script>
 const state={beans:15,roast:'medium',flavor:'balanced',strength:2,firstShare:50,elapsed:0,running:false,timer:null,recipe:[],lastStep:0,audioCtx:null};
 const roastInfo={light:{temp:93},medium:{temp:88},dark:{temp:83}};
@@ -157,7 +152,7 @@ function flavorFromRange(){state.flavor=state.firstShare<47?'sweet':state.firstS
 function renderDots(current){$('#pourDots').innerHTML=state.recipe.map((_,i)=>`<span class="pourDot ${i<current?'done':''} ${i===current?'current':''}"></span>`).join('')}
 function initAudio(){try{if(!state.audioCtx)state.audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(state.audioCtx.state==='suspended')state.audioCtx.resume()}catch(e){}}
 function playPourSound(){try{if(!state.audioCtx)return;const ctx=state.audioCtx,now=ctx.currentTime;const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type='sine';osc.frequency.setValueAtTime(660,now);osc.frequency.exponentialRampToValueAtTime(880,now+.11);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.18,now+.015);gain.gain.exponentialRampToValueAtTime(.0001,now+.22);osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+.23)}catch(e){}}
-function flashStep(){const card=$('#timerCard');card.classList.remove('alert');void card.offsetWidth;card.classList.add('alert');setTimeout(()=>card.classList.remove('alert'),1100)}
+function flashStep(){const card=$('#timerCard');card.classList.remove('alert');void card.offsetWidth;card.classList.add('alert');setTimeout(()=>card.classList.remove('alert'),1400)}
 function updateTimerView(withEffect=true){
  $('#clock').textContent=t(state.elapsed);if(!state.recipe.length)return;
  let i=0;for(let x=0;x<state.recipe.length;x++)if(state.elapsed>=state.recipe[x].time)i=x;
