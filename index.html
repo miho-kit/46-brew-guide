@@ -26,7 +26,13 @@ button,input{font:inherit}button{cursor:pointer}
 .roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}.grindText{font-size:11.5px;color:var(--muted);margin:0}
 .rangeBox{margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}input[type=range]{width:100%;accent-color:var(--accent);margin:7px 0 1px}.rangeHint{font-size:10.5px;color:var(--muted);margin:1px 0 0;text-align:center}
 .recipeHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:7px}.recipeHead h2{margin:0}.recipeMeta{font-weight:800;font-size:17px;color:var(--accent-dark);white-space:nowrap}.recipe{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--cream)}.recipeRow{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid var(--line)}.recipeRow:last-child{border-bottom:none}.pourLabel{font-size:12px;font-weight:700}.pourAmount{font-size:17px;font-weight:800;color:var(--accent-dark)}
-.timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.clock{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums}.timerCard{margin-top:6px;background:var(--panel2);border-radius:11px;padding:10px;text-align:center}.step{font-size:10px;color:var(--muted)}.target{font-size:20px;font-weight:800;margin-top:2px}.next{font-size:10.5px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent);color:#fff;border-color:var(--accent)}
+.timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.clock{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums}
+.timerCard{margin-top:6px;background:var(--panel2);border-radius:11px;padding:12px 10px 13px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}
+.pourDots{display:flex;justify-content:center;gap:9px;margin-bottom:9px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease}.pourDot.done,.pourDot.current{background:var(--accent)}.pourDot.current{transform:scale(1.35)}
+.timerMain{display:flex;justify-content:center;align-items:center;gap:12px}.stepBadge{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);font-size:19px;font-weight:800;color:var(--accent-dark);background:var(--cream);transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}.timerAmount{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;transition:color .2s ease}
+.timerCard.alert{background:var(--accent);color:#fff;transform:scale(1.015)}.timerCard.alert .pourDot{border-color:#fff}.timerCard.alert .pourDot.done,.timerCard.alert .pourDot.current{background:#fff}.timerCard.alert .stepBadge{background:#fff;color:var(--accent-dark);border-color:#fff;animation:stepPop .65s ease}.timerCard.alert .timerAmount{color:#fff}
+@keyframes stepPop{0%{transform:scale(.75)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent);color:#fff;border-color:var(--accent)}
 details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--accent-dark);cursor:pointer}.detailsBody{font-size:11px;color:var(--muted);margin-top:6px}.detailsBody p{margin:5px 0}
 @media(max-width:430px){.heroArt{width:min(56vw,205px);margin-bottom:-17px}.title{font-size:25px}}
 @media(max-width:360px){.title{font-size:22px}.heroArt{width:min(55vw,190px);margin-bottom:-15px}.choice{padding:5px 3px}.recipeMeta{font-size:16px}}
@@ -92,10 +98,9 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 
 <section class="timer">
 <div class="timerTop"><b>抽出タイマー</b><div class="clock" id="clock">0:00</div></div>
-<div class="timerCard">
-<div class="step" id="timerStep">準備完了</div>
-<div class="target" id="timerTarget">最初の注湯を開始</div>
-<div class="next" id="timerNext">スタートを押してください</div>
+<div class="timerCard" id="timerCard">
+<div class="pourDots" id="pourDots"></div>
+<div class="timerMain"><div class="stepBadge" id="stepBadge">1</div><div class="timerAmount" id="timerAmount">45g</div></div>
 </div>
 <div class="actions"><button class="primary" id="startBtn">抽出スタート</button><button id="pauseBtn" disabled>一時停止</button><button id="resetBtn">リセット</button></div>
 </section>
@@ -104,7 +109,7 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 </main>
 
 <script>
-const state={beans:15,roast:'medium',flavor:'balanced',strength:2,firstShare:50,elapsed:0,running:false,timer:null,recipe:[]};
+const state={beans:15,roast:'medium',flavor:'balanced',strength:2,firstShare:50,elapsed:0,running:false,timer:null,recipe:[],lastStep:0,audioCtx:null};
 const roastInfo={light:{temp:93},medium:{temp:88},dark:{temp:83}};
 const times=[0,45,90,130,160];
 const fmt=n=>Number.isInteger(Math.round(n*10)/10)?String(Math.round(n)):((Math.round(n*10)/10).toFixed(1));
@@ -120,22 +125,53 @@ function buildRecipe(){
  $('#ratioLabel').textContent=`${state.firstShare}：${100-state.firstShare}`;
  $('#recipe').innerHTML=state.recipe.map(r=>`<div class="recipeRow"><div class="pourLabel">${r.idx}投目</div><div class="pourAmount">${fmt(r.amount)}g</div></div>`).join('');
  active('#beanChoices .choice','beans',state.beans);active('#roastChoices .choice','roast',state.roast);active('#flavorChoices .choice','flavor',state.flavor);active('#strengthChoices .choice','strength',state.strength);
- if(!state.running)updateTimerView();
+ if(!state.running){state.lastStep=0;updateTimerView(false)}
 }
 function flavorFromRange(){state.flavor=state.firstShare<47?'sweet':state.firstShare>53?'bright':'balanced'}
-function updateTimerView(){
+function renderDots(current){
+ $('#pourDots').innerHTML=state.recipe.map((_,i)=>`<span class="pourDot ${i<current?'done':''} ${i===current?'current':''}"></span>`).join('');
+}
+function initAudio(){
+ try{
+  if(!state.audioCtx)state.audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(state.audioCtx.state==='suspended')state.audioCtx.resume();
+ }catch(e){}
+}
+function playPourSound(){
+ try{
+  if(!state.audioCtx)return;
+  const ctx=state.audioCtx,now=ctx.currentTime;
+  const osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type='sine';osc.frequency.setValueAtTime(660,now);osc.frequency.exponentialRampToValueAtTime(880,now+.11);
+  gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.18,now+.015);gain.gain.exponentialRampToValueAtTime(.0001,now+.22);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+.23);
+ }catch(e){}
+}
+function flashStep(){
+ const card=$('#timerCard');
+ card.classList.remove('alert');void card.offsetWidth;card.classList.add('alert');
+ setTimeout(()=>card.classList.remove('alert'),1400);
+}
+function updateTimerView(withEffect=true){
  $('#clock').textContent=t(state.elapsed);if(!state.recipe.length)return;
  let i=0;for(let x=0;x<state.recipe.length;x++)if(state.elapsed>=state.recipe[x].time)i=x;
- const current=state.recipe[i],finalTime=state.recipe[state.recipe.length-1].time+45;
- if(state.elapsed>=finalTime){$('#timerStep').textContent='抽出完了';$('#timerTarget').textContent='完成';$('#timerNext').textContent='ドリッパーを外してください';stop(false);return}
- $('#timerStep').textContent=`${current.idx}投目`;
- $('#timerTarget').textContent=`${fmt(current.amount)}g注ぐ`;
- const next=state.recipe[i+1];
- $('#timerNext').textContent=next?`次 ${t(next.time)} ／ 湯がほぼ落ち切ったら次へ`:'最後の注湯です';
+ const finalTime=state.recipe[state.recipe.length-1].time+45;
+ if(state.elapsed>=finalTime){renderDots(state.recipe.length);$('#stepBadge').textContent='✓';$('#timerAmount').textContent='完成';return}
+ const changed=i!==state.lastStep;
+ renderDots(i);
+ $('#stepBadge').textContent=i+1;
+ $('#timerAmount').textContent=fmt(state.recipe[i].amount)+'g';
+ if(withEffect&&state.running&&changed){playPourSound();flashStep()}
+ state.lastStep=i;
 }
-function start(){if(state.running)return;state.running=true;$('#startBtn').disabled=true;$('#pauseBtn').disabled=false;$('#startBtn').textContent='抽出中';state.timer=setInterval(()=>{state.elapsed++;updateTimerView()},1000);updateTimerView()}
+function start(){
+ if(state.running)return;
+ initAudio();state.running=true;$('#startBtn').disabled=true;$('#pauseBtn').disabled=false;$('#startBtn').textContent='抽出中';
+ updateTimerView(false);
+ state.timer=setInterval(()=>{state.elapsed++;updateTimerView(true)},1000);
+}
 function stop(resume=true){if(state.timer)clearInterval(state.timer);state.timer=null;state.running=false;$('#startBtn').disabled=false;$('#pauseBtn').disabled=true;$('#startBtn').textContent=resume&&state.elapsed>0?'再開':'抽出スタート'}
-function reset(){stop(false);state.elapsed=0;$('#startBtn').textContent='抽出スタート';updateTimerView()}
+function reset(){stop(false);state.elapsed=0;state.lastStep=0;$('#startBtn').textContent='抽出スタート';$('#timerCard').classList.remove('alert');updateTimerView(false)}
 $$('#beanChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.beans=+b.dataset.beans;reset();buildRecipe()}));
 $$('#roastChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.roast=b.dataset.roast;buildRecipe()}));
 $$('#flavorChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.flavor=b.dataset.flavor;state.firstShare=state.flavor==='sweet'?40:state.flavor==='bright'?60:50;$('#flavorRange').value=state.firstShare;reset();buildRecipe()}));
