@@ -26,12 +26,12 @@ button,input{font:inherit}button{cursor:pointer}
 .roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}.grindSection{display:flex;align-items:center;gap:12px}.grindSection h2{margin:0;white-space:nowrap}.grindText{font-size:11.5px;color:var(--muted);margin:0;white-space:nowrap}
 .rangeBox{margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}input[type=range]{width:100%;accent-color:var(--accent);margin:7px 0 1px}.rangeHint{font-size:10.5px;color:var(--muted);margin:1px 0 0;text-align:center}
 .recipeHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:0}.recipeHead h2{margin:0}.recipeMeta{font-weight:800;font-size:17px;color:var(--accent-dark);white-space:nowrap}
-.timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.clock{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums}
-.timerCard{margin-top:6px;background:var(--panel2);border-radius:11px;padding:12px 10px 13px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}
-.pourDots{display:flex;justify-content:center;gap:9px;margin-bottom:9px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease}.pourDot.done,.pourDot.current{background:var(--accent)}.pourDot.current{transform:scale(1.35)}
-.timerMain{display:flex;justify-content:center;align-items:center;gap:12px}.stepBadge{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--accent);font-size:19px;font-weight:800;color:var(--accent-dark);background:var(--cream);transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}.timerAmount{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;transition:color .2s ease}
-.timerCard.alert{background:var(--accent);color:#fff;transform:scale(1.015)}.timerCard.alert .pourDot{border-color:#fff}.timerCard.alert .pourDot.done,.timerCard.alert .pourDot.current{background:#fff}.timerCard.alert .stepBadge{background:#fff;color:var(--accent-dark);border-color:#fff;animation:stepPop .65s ease}.timerCard.alert .timerAmount{color:#fff}
-@keyframes stepPop{0%{transform:scale(.75)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.pourProgress{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0}.pourDots{display:flex;justify-content:center;align-items:center;gap:9px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}.pourDot.done{background:var(--accent);opacity:.42}.pourDot.current{background:var(--accent);transform:scale(1.45);opacity:1}.timerAmount{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1;transition:transform .2s ease,color .2s ease}
+.timerCard{margin-top:8px;background:var(--panel2);border-radius:11px;padding:13px 10px 14px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}.clock{font-size:38px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;line-height:1.1;transition:color .22s ease,transform .22s ease}
+.timerCard.alert{background:var(--accent);color:#fff;transform:scale(1.012)}.timerCard.alert .clock{color:#fff;animation:clockPop .65s ease}.pourProgress.stepChange .pourDot.current{animation:dotPulse .7s ease}.pourProgress.stepChange .timerAmount{animation:amountPop .7s ease}
+@keyframes clockPop{0%{transform:scale(.94)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes dotPulse{0%{transform:scale(.8)}45%{transform:scale(1.9)}100%{transform:scale(1.45)}}
+@keyframes amountPop{0%{transform:scale(.94)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
 .actions{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}.actions button{min-height:40px;border-radius:11px;border:1px solid var(--line);background:var(--cream);color:var(--ink);padding:0 11px;font-weight:700}.actions .primary{flex:1;background:var(--accent);color:#fff;border-color:var(--accent)}
 details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--accent-dark);cursor:pointer}.detailsBody{font-size:11px;color:var(--muted);margin-top:6px}.detailsBody p{margin:5px 0}
 @media(max-width:430px){
@@ -49,14 +49,12 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
  .grindSection{gap:8px;min-height:40px}.grindSection h2{margin:0}.grindText{font-size:9.8px}
  .rangeBox{margin-top:5px;border-radius:9px;padding:6px 7px}.rangeTop{font-size:11px}input[type=range]{margin:5px 0 0}.rangeHint{display:none}
  .recipeMeta{font-size:15.5px}.recipeHead{align-items:center}.recipeHead h2{margin:0}
- .timerTop b{font-size:13px}.clock{font-size:24px}
- .timerCard{margin-top:5px;border-radius:9px;padding:8px 8px 9px}
- .pourDots{gap:7px;margin-bottom:6px}.pourDot{width:8px;height:8px}
- .timerMain{gap:9px}.stepBadge{width:34px;height:34px;font-size:17px}.timerAmount{font-size:24px}
+ .timerTop b{font-size:13px}.pourProgress{gap:9px}.pourDots{gap:7px}.pourDot{width:8px;height:8px}.timerAmount{font-size:24px}
+ .timerCard{margin-top:6px;border-radius:9px;padding:10px 8px 11px}.clock{font-size:32px}
  .actions{gap:5px;margin-top:5px;flex-wrap:nowrap}.actions button{min-height:36px;border-radius:9px;padding:0 8px;font-size:12.5px}.actions .primary{min-width:0}
  details{padding:8px 9px}summary{font-size:12px}.detailsBody{font-size:10px;margin-top:4px}
 }
-@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.recipeMeta{font-size:14px}.grindText{font-size:8.8px}}
+@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.recipeMeta{font-size:14px}.grindText{font-size:8.8px}.pourProgress{gap:7px}.pourDots{gap:6px}.timerAmount{font-size:22px}.clock{font-size:30px}}
 </style>
 </head>
 <body>
@@ -117,11 +115,11 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 </section>
 
 <section class="timer">
-<div class="timerTop"><b>抽出タイマー</b><div class="clock" id="clock">0:00</div></div>
-<div class="timerCard" id="timerCard">
-<div class="pourDots" id="pourDots"></div>
-<div class="timerMain"><div class="stepBadge" id="stepBadge">1</div><div class="timerAmount" id="timerAmount">45g</div></div>
+<div class="timerTop">
+<b>抽出タイマー</b>
+<div class="pourProgress" id="pourProgress"><div class="pourDots" id="pourDots"></div><div class="timerAmount" id="timerAmount">45g</div></div>
 </div>
+<div class="timerCard" id="timerCard"><div class="clock" id="clock">0:00</div></div>
 <div class="actions"><button class="primary" id="startBtn">抽出スタート</button><button id="pauseBtn" disabled>一時停止</button><button id="resetBtn">リセット</button></div>
 </section>
 
@@ -167,18 +165,19 @@ function playPourSound(){
  }catch(e){}
 }
 function flashStep(){
- const card=$('#timerCard');
- card.classList.remove('alert');void card.offsetWidth;card.classList.add('alert');
- setTimeout(()=>card.classList.remove('alert'),1400);
+ const card=$('#timerCard'),progress=$('#pourProgress');
+ card.classList.remove('alert');progress.classList.remove('stepChange');
+ void card.offsetWidth;void progress.offsetWidth;
+ card.classList.add('alert');progress.classList.add('stepChange');
+ setTimeout(()=>{card.classList.remove('alert');progress.classList.remove('stepChange')},1100);
 }
 function updateTimerView(withEffect=true){
  $('#clock').textContent=t(state.elapsed);if(!state.recipe.length)return;
  let i=0;for(let x=0;x<state.recipe.length;x++)if(state.elapsed>=state.recipe[x].time)i=x;
  const finalTime=state.recipe[state.recipe.length-1].time+45;
- if(state.elapsed>=finalTime){renderDots(state.recipe.length);$('#stepBadge').textContent='✓';$('#timerAmount').textContent='完成';return}
+ if(state.elapsed>=finalTime){renderDots(state.recipe.length);$('#timerAmount').textContent='完成';return}
  const changed=i!==state.lastStep;
  renderDots(i);
- $('#stepBadge').textContent=i+1;
  $('#timerAmount').textContent=fmt(state.recipe[i].amount)+'g';
  if(withEffect&&state.running&&changed){playPourSound();flashStep()}
  state.lastStep=i;
@@ -190,7 +189,7 @@ function start(){
  state.timer=setInterval(()=>{state.elapsed++;updateTimerView(true)},1000);
 }
 function stop(resume=true){if(state.timer)clearInterval(state.timer);state.timer=null;state.running=false;$('#startBtn').disabled=false;$('#pauseBtn').disabled=true;$('#startBtn').textContent=resume&&state.elapsed>0?'再開':'抽出スタート'}
-function reset(){stop(false);state.elapsed=0;state.lastStep=0;$('#startBtn').textContent='抽出スタート';$('#timerCard').classList.remove('alert');updateTimerView(false)}
+function reset(){stop(false);state.elapsed=0;state.lastStep=0;$('#startBtn').textContent='抽出スタート';$('#timerCard').classList.remove('alert');$('#pourProgress').classList.remove('stepChange');updateTimerView(false)}
 $$('#beanChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.beans=+b.dataset.beans;reset();buildRecipe()}));
 $$('#roastChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.roast=b.dataset.roast;buildRecipe()}));
 $$('#flavorChoices .choice').forEach(b=>b.addEventListener('click',()=>{state.flavor=b.dataset.flavor;state.firstShare=state.flavor==='sweet'?40:state.flavor==='bright'?60:50;$('#flavorRange').value=state.firstShare;reset();buildRecipe()}));
