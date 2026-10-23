@@ -22,10 +22,11 @@ button,input{font:inherit}button{cursor:pointer}
 .title{font-size:27px;font-weight:800;margin:0;color:var(--accent-dark);letter-spacing:.01em}.sub{font-size:12px;color:var(--muted);margin:2px 0 0}
 .hero + .section{margin-top:0;padding-top:14px}.section,.timer,details{margin-top:8px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:11px}
 .section h2{font-size:14px;margin:0 0 7px;color:var(--accent-dark)}.hint{font-size:10.5px;color:var(--muted);margin:5px 0 0}
+.sectionTitleRow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 7px}.sectionTitleRow h2{margin:0}.inlineNote{margin:0;font-size:11px;color:var(--muted)}
 .grid3,.tasteRow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.choice{min-height:46px;border:1px solid var(--line);background:var(--cream);border-radius:11px;padding:6px;color:var(--ink)}.choice.active{background:var(--accent);color:#fff;border-color:var(--accent)}.choice.active small{color:#f2e8df}.choice strong{font-size:16px;display:block}.choice small{display:block;font-size:10px;color:var(--muted);margin-top:1px}
-.roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}.grindSection{display:flex;align-items:center;gap:12px}.grindSection h2{margin:0;white-space:nowrap}.grindText{font-size:11.5px;color:var(--muted);margin:0;white-space:nowrap}
+.roast strong{font-size:12px}.roast .temp{font-size:17px;font-weight:800;display:block;line-height:1.1;margin-top:2px}
 .rangeBox{margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:8px 9px;background:#fffaf5}.rangeTop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}input[type=range]{width:100%;accent-color:var(--accent);margin:7px 0 1px}.rangeHint{font-size:10.5px;color:var(--muted);margin:1px 0 0;text-align:center}
-.recipeHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:0}.recipeHead h2{margin:0}.recipeMeta{font-weight:800;font-size:17px;color:var(--accent-dark);white-space:nowrap}
+.recipeHead{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin-bottom:0}.recipeHead h2{margin:0}.recipeChoiceSummary{font-weight:800;font-size:16px;color:var(--accent-dark);text-align:center;line-height:1.2;min-width:0}.recipeMeta{font-weight:800;font-size:17px;color:var(--accent-dark);white-space:nowrap}
 .timerTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.timerTop b{font-size:14px}.pourProgress{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0}.pourDots{display:flex;justify-content:center;align-items:center;gap:9px}.pourDot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,opacity .2s ease}.pourDot.done{background:var(--accent);opacity:.42}.pourDot.current{background:var(--accent);transform:scale(1.45);opacity:1}.timerAmount{font-size:27px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1;transition:transform .2s ease,color .2s ease}
 .timerCard{margin-top:8px;background:var(--panel2);border-radius:11px;padding:13px 10px 14px;text-align:center;transition:background .22s ease,color .22s ease,transform .22s ease;overflow:hidden}.clock{font-size:38px;font-weight:800;color:var(--accent-dark);font-variant-numeric:tabular-nums;line-height:1.1;transition:color .22s ease,transform .22s ease}
 .timerCard.alert{background:var(--accent);color:#fff;transform:scale(1.012)}.timerCard.alert .clock{color:#fff;animation:clockPop .65s ease}.pourProgress.stepChange .pourDot.current{animation:dotPulse .7s ease}.pourProgress.stepChange .timerAmount{animation:amountPop .7s ease}
@@ -41,20 +42,19 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
  .title{font-size:24px}.sub{font-size:11px;margin-top:1px}
  .hero + .section{margin-top:0;padding-top:9px;position:relative;z-index:1}
  .section,.timer,details{margin-top:5px;padding:8px 9px;border-radius:13px}
- .section h2{font-size:13px;margin:0 0 5px}
+ .section h2{font-size:13px;margin:0 0 5px}.sectionTitleRow{gap:6px;margin:0 0 5px}.sectionTitleRow h2{margin:0}.inlineNote{font-size:9.5px}
  .grid3,.tasteRow{gap:5px}
  .choice{min-height:40px;border-radius:9px;padding:4px 4px}
  .choice strong{font-size:15px}.choice small{font-size:9px;margin-top:0}
  .roast strong{font-size:11px}.roast .temp{font-size:15.5px;margin-top:1px}
- .grindSection{gap:8px;min-height:40px}.grindSection h2{margin:0}.grindText{font-size:9.8px}
  .rangeBox{margin-top:5px;border-radius:9px;padding:6px 7px}.rangeTop{font-size:11px}input[type=range]{margin:5px 0 0}.rangeHint{display:none}
- .recipeMeta{font-size:15.5px}.recipeHead{align-items:center}.recipeHead h2{margin:0}
+ .recipeHead{grid-template-columns:auto 1fr auto;gap:8px}.recipeChoiceSummary{font-size:13.5px}.recipeMeta{font-size:15.5px}.recipeHead h2{margin:0}
  .timerTop b{font-size:13px}.pourProgress{gap:9px}.pourDots{gap:7px}.pourDot{width:8px;height:8px}.timerAmount{font-size:24px}
  .timerCard{margin-top:6px;border-radius:9px;padding:10px 8px 11px}.clock{font-size:32px}
  .actions{gap:5px;margin-top:5px;flex-wrap:nowrap}.actions button{min-height:36px;border-radius:9px;padding:0 8px;font-size:12.5px}.actions .primary{min-width:0}
  details{padding:8px 9px}summary{font-size:12px}.detailsBody{font-size:10px;margin-top:4px}
 }
-@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.recipeMeta{font-size:14px}.grindText{font-size:8.8px}.pourProgress{gap:7px}.pourDots{gap:6px}.timerAmount{font-size:22px}.clock{font-size:30px}}
+@media(max-width:360px){.title{font-size:21px}.hero{grid-template-columns:1fr 138px;min-height:102px}.heroArt{width:148px;max-height:136px;right:-2px;bottom:-20px}.choice{padding:3px 2px}.inlineNote{font-size:9px}.recipeChoiceSummary{font-size:12.5px}.recipeMeta{font-size:14px}.pourProgress{gap:7px}.pourDots{gap:6px}.timerAmount{font-size:22px}.clock{font-size:30px}}
 </style>
 </head>
 <body>
@@ -74,17 +74,12 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 </section>
 
 <section class="section">
-<h2>焙煎度・湯温</h2>
+<div class="sectionTitleRow"><h2>焙煎度・湯温</h2><p class="inlineNote">（挽き目：中粗〜粗挽き｜濃く→細かめ｜薄く→粗め）</p></div>
 <div class="grid3" id="roastChoices">
 <button class="choice roast" data-roast="light"><strong>浅煎り</strong><span class="temp">93℃</span></button>
 <button class="choice roast active" data-roast="medium"><strong>中煎り</strong><span class="temp">88℃</span></button>
 <button class="choice roast" data-roast="dark"><strong>深煎り</strong><span class="temp">83℃</span></button>
 </div>
-</section>
-
-<section class="section grindSection">
-<h2>挽き目</h2>
-<p class="grindText">中粗〜粗挽き　｜　濃く→細かめ　｜　薄く→粗め</p>
 </section>
 
 <section class="section">
@@ -111,7 +106,7 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 </section>
 
 <section class="section">
-<div class="recipeHead"><h2>今日のレシピ</h2><div class="recipeMeta"><span id="totalWater">225g</span>・<span id="brewTemp">88℃</span></div></div>
+<div class="recipeHead"><h2>今日のレシピ</h2><div class="recipeChoiceSummary" id="recipeChoiceSummary">バランス、標準</div><div class="recipeMeta"><span id="totalWater">225g</span>・<span id="brewTemp">88℃</span></div></div>
 </section>
 
 <section class="timer">
@@ -129,6 +124,7 @@ details{padding:10px 11px}summary{font-weight:700;font-size:13px;color:var(--acc
 <script>
 const state={beans:15,roast:'medium',flavor:'balanced',strength:2,firstShare:50,elapsed:0,running:false,timer:null,recipe:[],lastStep:0,audioCtx:null};
 const roastInfo={light:{temp:93},medium:{temp:88},dark:{temp:83}};
+const labelMap={flavor:{sweet:'甘く',balanced:'バランス',bright:'明るく'},strength:{1:'軽め',2:'標準',3:'しっかり'}};
 const times=[0,45,90,130,160];
 const fmt=n=>Number.isInteger(Math.round(n*10)/10)?String(Math.round(n)):((Math.round(n*10)/10).toFixed(1));
 const t=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
@@ -141,6 +137,7 @@ function buildRecipe(){
  $('#totalWater').textContent=fmt(total)+'g';
  $('#brewTemp').textContent=roastInfo[state.roast].temp+'℃';
  $('#ratioLabel').textContent=`${state.firstShare}：${100-state.firstShare}`;
+ $('#recipeChoiceSummary').textContent=`${labelMap.flavor[state.flavor]}、${labelMap.strength[state.strength]}`;
  active('#beanChoices .choice','beans',state.beans);active('#roastChoices .choice','roast',state.roast);active('#flavorChoices .choice','flavor',state.flavor);active('#strengthChoices .choice','strength',state.strength);
  if(!state.running){state.lastStep=0;updateTimerView(false)}
 }
