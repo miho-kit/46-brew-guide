@@ -1,4 +1,4 @@
-const CACHE='brew46-v5';
+const CACHE='brew46-v6';
 const ASSETS=[
   './',
   './index.html',
@@ -38,7 +38,7 @@ self.addEventListener('fetch',event=>{
   }
 
   event.respondWith(
-    caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+    caches.match(request,{ignoreSearch:true}).then(cached=>cached||fetch(request).then(response=>{
       const copy=response.clone();
       caches.open(CACHE).then(cache=>cache.put(request,copy));
       return response;
