@@ -1,5 +1,12 @@
-const CACHE='brew46-v4';
-const ASSETS=['./manifest.webmanifest','./icon-180.png','./icon.svg'];
+const CACHE='brew46-v5';
+const ASSETS=[
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './apple-touch-icon.png',
+  './icon.svg',
+  './penguin-hero-transparent.png'
+];
 
 self.addEventListener('install',event=>{
   self.skipWaiting();
@@ -16,22 +23,25 @@ self.addEventListener('activate',event=>{
 
 self.addEventListener('fetch',event=>{
   const request=event.request;
+
   if(request.mode==='navigate'){
     event.respondWith(
       fetch(request,{cache:'no-store'})
-        .then(response=>response)
-        .catch(()=>caches.match('./index.html'))
+        .then(response=>{
+          const copy=response.clone();
+          caches.open(CACHE).then(cache=>cache.put('./index.html',copy));
+          return response;
+        })
+        .catch(()=>caches.match('./index.html').then(response=>response||caches.match('./')))
     );
     return;
   }
 
   event.respondWith(
-    fetch(request)
-      .then(response=>{
-        const copy=response.clone();
-        caches.open(CACHE).then(cache=>cache.put(request,copy));
-        return response;
-      })
-      .catch(()=>caches.match(request))
+    caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+      const copy=response.clone();
+      caches.open(CACHE).then(cache=>cache.put(request,copy));
+      return response;
+    }))
   );
 });
