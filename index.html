@@ -113,7 +113,7 @@
     <div class="sevenTimelineWrap">
       <div class="sevenTimelineLabel">注湯タイミング</div>
       <div class="sevenTimeline">0:00 / 0:20 / 0:40 / 1:00 / 1:20 / 1:40 / 2:00</div>
-      <p class="sevenNote">7投目以降は落ち切りまでタイマーを継続します。</p>
+      <p class="sevenNote">1:10に75℃への温度切替を通知。7投目以降は落ち切りまでタイマーを継続します。</p>
     </div>
   </section>
 
@@ -123,7 +123,7 @@
   </footer>
 </main>
 <script>
-const S={mode:'46',beans:15,roast:'medium',flavor:'balanced',strength:3,share:50,elapsed:0,running:false,timer:null,recipe:[],last:0,audio:null,started:null,wake:null};
+const S={mode:'46',beans:15,roast:'medium',flavor:'balanced',strength:3,share:50,elapsed:0,running:false,timer:null,recipe:[],last:0,audio:null,started:null,wake:null,tempNotified:false};
 const R={light:93,medium:88,dark:83},F={sweet:'甘く',balanced:'バランス',bright:'明るく'},ST={1:'軽め',2:'中間',3:'基本'},T46=[0,45,90,130,160],T7=[0,20,40,60,80,100,120],$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],fmt=n=>Math.round(n*10)%10?Number(n).toFixed(1):String(Math.round(n));
 function active(id,v){$$('#'+id+' .choice').forEach(b=>b.classList.toggle('active',b.dataset.v==v))}
 function lockSettings(locked){$$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,.modeBtn').forEach(el=>el.disabled=locked);$('#range').disabled=locked}
@@ -151,6 +151,7 @@ function dots(i){$('#dots').innerHTML=S.recipe.map((_,x)=>`<span class="dot ${x<
 function clock(ms){let x=Math.max(0,Math.floor(ms/10)),m=Math.floor(x/6000),s=Math.floor((x%6000)/100),c=x%100;return `${m}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`}
 function endMs(){return S.recipe.length?(S.recipe.at(-1).time+45)*1000:0}
 function beep(){try{if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();let c=S.audio,n=c.currentTime,o=c.createOscillator(),g=c.createGain();o.frequency.value=760;g.gain.setValueAtTime(.15,n);g.gain.exponentialRampToValueAtTime(.0001,n+.2);o.connect(g);g.connect(c.destination);o.start();o.stop(n+.21)}catch(e){}}
+function tempBeep(){try{if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();let c=S.audio,n=c.currentTime;[[620,0],[880,.16]].forEach(([f,d])=>{let o=c.createOscillator(),g=c.createGain(),t=n+d;o.frequency.value=f;g.gain.setValueAtTime(.13,t);g.gain.exponentialRampToValueAtTime(.0001,t+.12);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.13)})}catch(e){}}
 function flash(){let c=$('#timerCard');c.classList.remove('alert');void c.offsetWidth;c.classList.add('alert');setTimeout(()=>c.classList.remove('alert'),1000)}
 function finish(){let end=endMs();clearInterval(S.timer);S.timer=null;S.elapsed=end;S.running=false;S.started=null;lockSettings(false);releaseWake();dots(S.recipe.length);$('#clock').textContent=clock(end);$('#timerStep').textContent='';$('#timerAmount').textContent='完成';$('#start').disabled=false;$('#start').textContent='もう一度';$('#pause').disabled=true}
 function view(effect=true){
@@ -163,9 +164,15 @@ function view(effect=true){
   }
   let changed=i!==S.last;
   dots(i);
-  $('#timerStep').textContent=(i+1)+'投目';
-  $('#timerAmount').textContent=fmt(S.recipe[i].amount)+'g';
-  if(effect&&S.running&&changed){beep();flash()}
+  if(S.mode==='seven'&&sec>=70&&sec<80){
+    $('#timerStep').textContent='温度';
+    $('#timerAmount').textContent='75℃へ';
+    if(effect&&S.running&&!S.tempNotified){S.tempNotified=true;tempBeep();flash()}
+  }else{
+    $('#timerStep').textContent=(i+1)+'投目';
+    $('#timerAmount').textContent=fmt(S.recipe[i].amount)+'g';
+    if(effect&&S.running&&changed){beep();flash()}
+  }
   S.last=i;
 }
 function start(){
@@ -175,7 +182,7 @@ function start(){
   S.running=true;S.started=performance.now()-S.elapsed;lockSettings(true);keepAwake();$('#start').disabled=true;$('#pause').disabled=false;$('#start').textContent='抽出中';view(false);S.timer=setInterval(()=>{S.elapsed=performance.now()-S.started;view(true)},10)
 }
 function stop(resume=true){if(S.running)S.elapsed=performance.now()-S.started;clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#start').textContent=resume&&S.elapsed>0?'再開':'抽出スタート';view(false)}
-function reset(){if(S.timer)clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;S.elapsed=0;S.last=0;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#start').textContent='抽出スタート';if(S.recipe.length)view(false)}
+function reset(){if(S.timer)clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;S.elapsed=0;S.last=0;S.tempNotified=false;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#start').textContent='抽出スタート';if(S.recipe.length)view(false)}
 $$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 $$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build()});
 $$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build()});
