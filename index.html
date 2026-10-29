@@ -23,7 +23,7 @@
 <main class="wrap">
   <nav class="modeSwitch" aria-label="抽出レシピ切替">
     <button class="modeBtn active" data-mode="46">4：6メソッド</button>
-    <button class="modeBtn" data-mode="seven">長崎愛美 7投式</button>
+    <button class="modeBtn" data-mode="seven">7投式</button>
   </nav>
 
   <section class="timer">
@@ -135,7 +135,7 @@ function build(){
     S.recipe=T7.map((time,i)=>({time,amount:30,temp:i<4?90:75}));
     $('#water').textContent='210g';
     $('#temp').textContent='90→75℃';
-    $('#summary').textContent='長崎愛美 7投式';
+    $('#summary').textContent='7投式';
   }else{
     let total=S.beans*15,front=total*.4,back=total*.6,a=front*S.share/100,b=front-a,e=back/S.strength,p=[a,b,...Array(S.strength).fill(e)];
     S.recipe=p.map((amount,i)=>({time:T46[i],amount}));
