@@ -143,3 +143,12 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
  #cafePourCard .cafePourStatic{min-height:54px!important}
  #cafePourCard .cafePourMain{font-size:30px!important}
 }
+
+/* v21: lighter primary brew button for readability */
+.actions .primary{
+  background:#f4e6d8!important;
+  color:#4a2b1b!important;
+  border-color:rgba(86,50,31,.24)!important;
+  box-shadow:0 4px 10px rgba(65,39,24,.10)!important;
+}
+.actions .primary:before{color:#4a2b1b!important}
