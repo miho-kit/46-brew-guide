@@ -12,49 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest?v=19">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
-<link rel="stylesheet" href="./theme.css?v=18">
-<style id="v19-hotfix">
-.appMark{display:none!important;height:0!important;margin:0!important;padding:0!important}
-.wrap{padding-top:2px!important}
-.timer{background:#76563f!important;color:#fff!important}
-.timer:before{background:linear-gradient(90deg,rgba(62,35,20,.72),rgba(78,48,29,.58)),url('./timer-bg.webp') center/cover no-repeat!important;opacity:1!important;filter:none!important}
-.timer:after{background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.15))!important}
-.timerTitle,.timerAmount,.clock,.timerStep{color:#fff!important;text-shadow:0 1px 3px rgba(38,20,10,.42)!important}
-.timerTitle .icon{color:#fff!important}
-.dot{border-color:#fff!important}
-.dot.current,.dot.done{background:#fff!important}
-.range{display:none!important}
-.block.tasteBlock{margin-bottom:0!important}
-.block.strengthBlock{margin-top:8px!important}
-.fourSixTimer{min-height:160px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
-.fourSixTimer .actions,.sevenTimer .actions{transform:translateY(12px)!important}
-.recipe.sevenRecipe .recipeLabel{font-size:0}
-.recipe.sevenRecipe .recipeLabel:after{content:'抽出ポイント';font-size:12.5px;font-weight:600;color:#654a39}
-.recipe.sevenRecipe .recipeStyle{font-weight:700!important;color:#4a2b1b!important}
-.recipe.sevenRecipe .recipeStyle b{font-weight:700!important;color:#4a2b1b!important}
-.sevenTimer{min-height:160px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
-#settingsSeven{min-height:395px!important}
-.recipe.cafeRecipe{grid-template-columns:auto 1fr!important}
-.recipe.cafeRecipe .recipeStyle{text-align:right!important;font-weight:600;color:#654a39!important}
-.recipe.cafeRecipe .recipeMeta{display:none!important}
-.recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:12px!important;line-height:1.42!important}
-#settings46{min-height:438px!important}
-@media(max-width:430px){
-  .recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:11.5px!important}
-  #settingsSeven{min-height:364px!important}
-  #settings46{min-height:379px!important;padding:7px 10px 8px!important}
-  #settings46 .block+.block{margin-top:7px!important;padding-top:1px!important}
-  #settings46 .block.tasteBlock{margin-top:7px!important}
-  #settings46 .block.strengthBlock{margin-top:5px!important;padding-top:1px!important}
-  #settings46 .block h2{margin-bottom:6px!important}
-  #settings46 .grind{margin-top:6px!important}
-  #settings46 details{margin-top:6px!important;padding-top:5px!important}
-}
-@media(max-width:390px){#settingsSeven{min-height:352px!important}#settings46{min-height:367px!important}}
-#footerSpacer{height:0;pointer-events:none}
-.brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
-.brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:0!important;object-fit:contain!important;object-position:center!important}
-</style>
+<link rel="stylesheet" href="./theme.css?v=30">
 </head>
 <body>
 <main class="wrap">
@@ -73,7 +31,11 @@
         <div class="clock" id="clock">0:00.00</div>
       </div>
     </div>
-    <div class="actions"><button class="primary" id="start">抽出スタート</button><button id="nextPour" class="hidden" disabled>次の注湯</button><button id="pause" disabled>一時停止</button><button id="reset">リセット</button></div>
+    <div class="actions">
+      <button class="primary" id="start">抽出スタート</button>
+      <button id="pause" disabled>一時停止</button>
+      <button id="reset">リセット</button>
+    </div>
   </section>
 
   <section class="timer hidden" id="cafePourCard">
@@ -96,6 +58,7 @@
         <button class="choice bean" data-v="30"><span class="beanMain">30g</span><span class="beanWater">450g</span></button>
       </div>
     </div>
+
     <div class="block">
       <h2><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#flame"></use></svg>焙煎度・湯温</h2>
       <div class="grid3" id="roasts">
@@ -105,15 +68,34 @@
       </div>
       <div class="grind"><span>挽き目：中粗〜粗挽き推奨</span><a class="compareBtn" href="./grinder.html">クリック比較表</a></div>
     </div>
+
     <div class="block tasteBlock">
       <h2><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#taste"></use></svg>味</h2>
-      <div class="grid3 taste" id="flavors"><button class="choice" data-v="sweet">甘く</button><button class="choice active" data-v="balanced">バランス</button><button class="choice" data-v="bright">明るく</button></div>
+      <div class="grid3 taste" id="flavors">
+        <button class="choice" data-v="sweet">甘く</button>
+        <button class="choice active" data-v="balanced">バランス</button>
+        <button class="choice" data-v="bright">明るく</button>
+      </div>
     </div>
+
     <div class="block strengthBlock">
       <h2><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#dripper"></use></svg>濃さ</h2>
-      <div class="grid3" id="strengthChoices"><button class="choice" data-v="1">軽め</button><button class="choice active" data-v="2">中間</button><button class="choice" data-v="3">基本<span class="strengthNote">（しっかり）</span></button></div>
+      <div class="grid3" id="strengthChoices">
+        <button class="choice" data-v="1">軽め</button>
+        <button class="choice active" data-v="2">中間</button>
+        <button class="choice" data-v="3">基本<span class="strengthNote">（しっかり）</span></button>
+      </div>
     </div>
-    <details><summary>4：6メソッドの考え方</summary><div class="details"><p>1. 粉量の15倍のお湯を使います。20gなら300gです。</p><p>2. 総湯量を40％と60％に分けます。</p><p>3. 最初の40％を2投に分け、1投目と2投目の量で甘さと明るさを調整します。</p><p>4. 残り60％は分割回数で濃度を調整します。</p></div></details>
+
+    <details>
+      <summary>4：6メソッドの考え方</summary>
+      <div class="details">
+        <p>1. 粉量の15倍のお湯を使います。20gなら300gです。</p>
+        <p>2. 総湯量を40％と60％に分けます。</p>
+        <p>3. 最初の40％を2投に分け、1投目と2投目の量で甘さと明るさを調整します。</p>
+        <p>4. 残り60％は分割回数で濃度を調整します。</p>
+      </div>
+    </details>
   </section>
 
   <section class="card fixedSettings hidden" id="settingsSeven">
@@ -126,47 +108,497 @@
       <div class="infoItem wide"><div class="infoLabel">湯温</div><div class="infoSplit"><div class="infoValue">90℃ → 75℃</div><span>1〜4投目 → 5〜7投目</span></div></div>
       <div class="infoItem wide"><div class="infoLabel">挽き目</div><div class="infoValue">粗挽き</div><div class="infoSub">TIMEMORE C2：30〜31クリック目安</div><a class="compareBtn infoCompare" href="./grinder.html">クリック比較表</a></div>
     </div>
-    <div class="timelineWrap"><div class="timelineLabel">注湯タイミング</div><div class="timeline">0:00 / 0:20 / 0:40 / 1:00 / 1:20 / 1:40 / 2:00</div><p class="note">1:10に75℃への温度切替を通知。7投目以降は落ち切りまでタイマーを継続します。</p></div>
+    <div class="timelineWrap">
+      <div class="timelineLabel">注湯タイミング</div>
+      <div class="timeline">0:00 / 0:20 / 0:40 / 1:00 / 1:20 / 1:40 / 2:00</div>
+      <p class="note">1:10に75℃への温度切替を通知。7投目以降は落ち切りまでタイマーを継続します。</p>
+    </div>
   </section>
 
   <section class="card fixedSettings hidden" id="settingsCafe">
     <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
-    <div class="grid2" id="cafeBeans"><button class="choice bean active" data-v="15"><span class="beanMain">15g</span><span class="beanWater">150g</span></button><button class="choice bean" data-v="20"><span class="beanMain">20g</span><span class="beanWater">200g</span></button></div>
-    <div class="infoGrid" style="margin-top:8px"><div class="infoItem"><div class="infoLabel">挽き目</div><div class="infoValue">中挽き</div></div><div class="infoItem"><div class="infoLabel">豆：お湯</div><div class="infoValue">1：10</div></div></div>
-    <div class="milkCalc"><p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#cup"></use></svg>仕上げの比率</p><div class="grid2 milkRatios" id="milkRatios"><button class="choice" data-v="3:7">3：7<br><small>バランス</small></button><button class="choice active" data-v="4:6">4：6<br><small>コーヒー強め</small></button></div><div class="calcResults"><div class="calcBox"><div class="calcLabel">加える牛乳</div><div class="calcValue" id="milkAmount">180g</div></div><div class="calcBox"><div class="calcLabel">完成量</div><div class="calcValue" id="finalAmount">300g</div></div></div><p class="note" id="cafeExample">15gでは抽出液120gを目安に計算しています。</p></div>
+    <div class="grid2" id="cafeBeans">
+      <button class="choice bean active" data-v="15"><span class="beanMain">15g</span><span class="beanWater">150g</span></button>
+      <button class="choice bean" data-v="20"><span class="beanMain">20g</span><span class="beanWater">200g</span></button>
+    </div>
+    <div class="infoGrid cafeInfoGrid">
+      <div class="infoItem"><div class="infoLabel">挽き目</div><div class="infoValue">中挽き</div></div>
+      <div class="infoItem"><div class="infoLabel">豆：お湯</div><div class="infoValue">1：10</div></div>
+    </div>
+    <div class="milkCalc">
+      <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#cup"></use></svg>仕上げの比率</p>
+      <div class="grid2 milkRatios" id="milkRatios">
+        <button class="choice" data-v="3:7">3：7<br><small>バランス</small></button>
+        <button class="choice active" data-v="4:6">4：6<br><small>コーヒー強め</small></button>
+      </div>
+      <div class="calcResults">
+        <div class="calcBox"><div class="calcLabel">加える牛乳</div><div class="calcValue" id="milkAmount">180g</div></div>
+        <div class="calcBox"><div class="calcLabel">完成量</div><div class="calcValue" id="finalAmount">300g</div></div>
+      </div>
+      <p class="note" id="cafeExample">15gでは抽出液120gを目安に計算しています。</p>
+    </div>
   </section>
 
   <div id="footerSpacer" aria-hidden="true"></div>
-  <footer class="brand"><img src="./footer-banner.webp?v=18" alt="ハンドドリップガイド Brew Guide"></footer>
+  <footer class="brand"><img src="./footer-banner.webp?v=30" alt="ハンドドリップガイド Brew Guide"></footer>
 </main>
+
 <script>
-const S={mode:'46',beans:15,roast:'medium',flavor:'balanced',strength:2,share:50,cafeBeans:15,milkRatio:'4:6',manualStep:0,elapsed:0,running:false,timer:null,recipe:[],last:0,audio:null,started:null,wake:null,tempNotified:false,footerTarget:null};
-const R={light:93,medium:88,dark:83},F={sweet:'甘く',balanced:'バランス',bright:'明るく'},ST={1:'軽め',2:'中間',3:'基本'},T46=[0,45,90,130,160],T7=[0,20,40,60,80,100,120],$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],fmt=n=>Math.round(n*10)%10?Number(n).toFixed(1):String(Math.round(n));
-function active(id,v){$$('#'+id+' .choice').forEach(b=>b.classList.toggle('active',b.dataset.v==v))}
-function lockSettings(locked){$$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,.modeBtn').forEach(el=>el.disabled=locked)}
-async function keepAwake(){if(!('wakeLock'in navigator)||S.wake)return;try{S.wake=await navigator.wakeLock.request('screen');S.wake.addEventListener('release',()=>{S.wake=null})}catch(e){S.wake=null}}
-function releaseWake(){if(!S.wake)return;const lock=S.wake;S.wake=null;lock.release().catch(()=>{})}
-function footerTop(){return $('.brand').getBoundingClientRect().top+window.scrollY}
-function captureFooterTarget(){const spacer=$('#footerSpacer');if(!spacer)return;spacer.style.height='0px';S.footerTarget=footerTop()}
-function alignFooter(){const spacer=$('#footerSpacer');if(!spacer)return;spacer.style.height='0px';if(S.mode==='46'){S.footerTarget=footerTop();return}if(S.footerTarget==null)return;const gap=Math.max(0,S.footerTarget-footerTop());spacer.style.height=gap+'px'}
-function setMode(mode){if(S.running)return;if(S.mode==='46')captureFooterTarget();if(mode==='cafe')S.cafeBeans=15;S.mode=mode;$$('.modeBtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('#timerSection').classList.toggle('hidden',mode==='cafe');$('#timerSection').classList.toggle('sevenTimer',mode==='seven');$('#timerSection').classList.toggle('fourSixTimer',mode==='46');$('#cafePourCard').classList.toggle('hidden',mode!=='cafe');$('.recipe').classList.toggle('sevenRecipe',mode==='seven');$('.recipe').classList.toggle('cafeRecipe',mode==='cafe');$('#settings46').classList.toggle('hidden',mode!=='46');$('#settingsSeven').classList.toggle('hidden',mode!=='seven');$('#settingsCafe').classList.toggle('hidden',mode!=='cafe');$('#nextPour').classList.add('hidden');reset();build();alignFooter()}
-function showRecipeTemp(show){$('#recipeSep').style.display=show?'':'none';$('#temp').style.display=show?'':'none'}
-function cafeStyleName(){return S.milkRatio==='3:7'?'バランス':'コーヒー強め'}
-function build(){if(S.mode==='seven'){showRecipeTemp(true);S.recipe=T7.map((time,i)=>({time,amount:30,temp:i<4?90:75}));$('#water').textContent='210g';$('#temp').textContent='90→75℃';$('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>'}else if(S.mode==='cafe'){showRecipeTemp(false);const total=S.cafeBeans*10,pour=total/5;S.recipe=[];$('#water').textContent='';$('#summary').textContent=S.cafeBeans+'g　'+cafeStyleName();$('#cafePourMain').textContent=fmt(pour)+'g × 5投';active('cafeBeans',S.cafeBeans);calcMilk()}else{showRecipeTemp(true);let total=S.beans*15,front=total*.4,back=total*.6,a=front*S.share/100,b=front-a,e=back/S.strength,p=[a,b,...Array(S.strength).fill(e)];S.recipe=p.map((amount,i)=>({time:T46[i],amount}));$('#water').textContent=total+'g';$('#temp').textContent=R[S.roast]+'℃';$('#summary').textContent=F[S.flavor]+'、'+ST[S.strength];active('beans',S.beans);active('roasts',S.roast);active('flavors',S.flavor);active('strengthChoices',S.strength)}if(!S.running){S.last=0;view(false)}}
-function dots(i){$('#dots').innerHTML=S.recipe.map((_,x)=>`<span class="dot ${x<i?'done':''} ${x===i?'current':''}"></span>`).join('')}
-function clock(ms){let x=Math.max(0,Math.floor(ms/10)),m=Math.floor(x/6000),s=Math.floor((x%6000)/100),c=x%100;return `${m}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`}
-function endMs(){return S.recipe.length?(S.recipe.at(-1).time+45)*1000:0}
-function beep(){try{if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();let c=S.audio,n=c.currentTime,o=c.createOscillator(),g=c.createGain();o.frequency.value=760;g.gain.setValueAtTime(.15,n);g.gain.exponentialRampToValueAtTime(.0001,n+.2);o.connect(g);g.connect(c.destination);o.start();o.stop(n+.21)}catch(e){}}
-function tempBeep(){try{if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();let c=S.audio,n=c.currentTime;[[620,0],[880,.16]].forEach(([f,d])=>{let o=c.createOscillator(),g=c.createGain(),t=n+d;o.frequency.value=f;g.gain.setValueAtTime(.13,t);g.gain.exponentialRampToValueAtTime(.0001,t+.12);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.13)})}catch(e){}}
-function flash(){let c=$('#timerCard');c.classList.remove('alert');void c.offsetWidth;c.classList.add('alert');setTimeout(()=>c.classList.remove('alert'),850)}
-function finish(){let end=endMs();clearInterval(S.timer);S.timer=null;S.elapsed=end;S.running=false;S.started=null;lockSettings(false);releaseWake();dots(S.recipe.length);$('#clock').textContent=clock(end);$('#timerStep').textContent='';$('#timerAmount').textContent='完成';$('#start').disabled=false;$('#start').textContent='もう一度';$('#pause').disabled=true;$('#nextPour').disabled=true}
-function view(effect=true){if(S.mode==='cafe')return;$('#clock').textContent=clock(S.elapsed);let sec=S.elapsed/1000,i=0;for(let x=0;x<S.recipe.length;x++)if(sec>=S.recipe[x].time)i=x;if(S.mode==='46'&&S.elapsed>=endMs()){if(S.running)finish();else{dots(S.recipe.length);$('#timerStep').textContent='';$('#timerAmount').textContent='完成'}return}let changed=i!==S.last;dots(i);if(S.mode==='seven'&&sec>=70&&sec<80){$('#timerStep').textContent='温度';$('#timerAmount').textContent='75℃へ';if(effect&&S.running&&!S.tempNotified){S.tempNotified=true;tempBeep();flash()}}else{let displayIndex=i;if(S.mode==='46'&&i<S.recipe.length-1&&sec>=S.recipe[i].time+5)displayIndex=i+1;if(S.mode==='46')$('#timerStep').textContent=displayIndex===0?'1投目':'次は、'+(displayIndex+1)+'投目';else $('#timerStep').textContent=(displayIndex+1)+'投目';$('#timerAmount').textContent=fmt(S.recipe[displayIndex].amount)+'g';if(effect&&S.running&&changed){beep();flash()}}S.last=i}
-function start(){if(S.mode==='cafe'||S.running)return;if(S.mode==='46'&&S.elapsed>=endMs()){S.elapsed=0;S.last=0}try{if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();if(S.audio.state==='suspended')S.audio.resume()}catch(e){}S.running=true;S.started=performance.now()-S.elapsed;lockSettings(true);keepAwake();$('#start').disabled=true;$('#pause').disabled=false;$('#start').textContent='抽出中';view(false);S.timer=setInterval(()=>{S.elapsed=performance.now()-S.started;view(true)},10)}
-function stop(resume=true){if(S.running)S.elapsed=performance.now()-S.started;clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#nextPour').disabled=true;$('#start').textContent=resume&&S.elapsed>0?'再開':'抽出スタート';view(false)}
-function reset(){if(S.timer)clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;S.elapsed=0;S.last=0;S.manualStep=0;S.tempNotified=false;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#nextPour').disabled=true;$('#start').textContent='抽出スタート';if(S.mode!=='cafe'&&S.recipe.length)view(false)}
-function nextPour(){}
-function calcMilk(){const c=S.cafeBeans===15?120:160;const factor=S.milkRatio==='3:7'?7/3:1.5,m=Math.round(c*factor),f=Math.round(c+m);$('#milkAmount').textContent=m+'g';$('#finalAmount').textContent=f+'g';$('#cafeExample').textContent=S.cafeBeans+'gでは抽出液'+c+'gを目安に計算しています。';if(S.mode==='cafe')$('#summary').textContent=S.cafeBeans+'g　'+cafeStyleName()+'　完成量'+f+'g'}
-$$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build();alignFooter()});$$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build();alignFooter()});$$('#flavors .choice').forEach(b=>b.onclick=()=>{S.flavor=b.dataset.v;S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;reset();build();alignFooter()});$$('#strengthChoices .choice').forEach(b=>b.onclick=()=>{S.strength=+b.dataset.v;reset();build();alignFooter()});$$('#cafeBeans .choice').forEach(b=>b.onclick=()=>{S.cafeBeans=+b.dataset.v;reset();build();alignFooter()});$$('#milkRatios .choice').forEach(b=>b.onclick=()=>{S.milkRatio=b.dataset.v;active('milkRatios',S.milkRatio);calcMilk();alignFooter()});$('#start').onclick=start;$('#nextPour').onclick=nextPour;$('#pause').onclick=()=>stop(true);$('#reset').onclick=reset;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.running)keepAwake()});build();requestAnimationFrame(()=>{captureFooterTarget();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(S.mode==='46')captureFooterTarget();else alignFooter()})});window.addEventListener('resize',()=>{if(S.mode==='46')captureFooterTarget();else alignFooter()});if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=18').catch(()=>{}));
+const S={
+  mode:'46',
+  beans:15,
+  roast:'medium',
+  flavor:'balanced',
+  strength:2,
+  share:50,
+  cafeBeans:15,
+  milkRatio:'4:6',
+  elapsed:0,
+  running:false,
+  timer:null,
+  recipe:[],
+  last:0,
+  audio:null,
+  started:null,
+  wake:null,
+  tempNotified:false,
+  footerTarget:null
+};
+
+const R={light:93,medium:88,dark:83};
+const F={sweet:'甘く',balanced:'バランス',bright:'明るく'};
+const ST={1:'軽め',2:'中間',3:'基本'};
+const T46=[0,45,90,130,160];
+const T7=[0,20,40,60,80,100,120];
+
+const $=selector=>document.querySelector(selector);
+const $$=selector=>[...document.querySelectorAll(selector)];
+const fmt=n=>Math.round(n*10)%10?Number(n).toFixed(1):String(Math.round(n));
+
+function active(id,value){
+  $$(`#${id} .choice`).forEach(button=>{
+    button.classList.toggle('active',button.dataset.v==value);
+  });
+}
+
+function lockSettings(locked){
+  $$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,.modeBtn')
+    .forEach(element=>{element.disabled=locked});
+}
+
+async function keepAwake(){
+  if(!('wakeLock' in navigator)||S.wake)return;
+  try{
+    S.wake=await navigator.wakeLock.request('screen');
+    S.wake.addEventListener('release',()=>{S.wake=null});
+  }catch(e){
+    S.wake=null;
+  }
+}
+
+function releaseWake(){
+  if(!S.wake)return;
+  const lock=S.wake;
+  S.wake=null;
+  lock.release().catch(()=>{});
+}
+
+function footerTop(){
+  return $('.brand').getBoundingClientRect().top+window.scrollY;
+}
+
+function captureFooterTarget(){
+  const spacer=$('#footerSpacer');
+  if(!spacer)return;
+  spacer.style.height='0px';
+  S.footerTarget=footerTop();
+}
+
+function alignFooter(){
+  const spacer=$('#footerSpacer');
+  if(!spacer)return;
+  spacer.style.height='0px';
+
+  if(S.mode==='46'){
+    S.footerTarget=footerTop();
+    return;
+  }
+  if(S.footerTarget==null)return;
+
+  const gap=Math.max(0,S.footerTarget-footerTop());
+  spacer.style.height=`${gap}px`;
+}
+
+function setMode(mode){
+  if(S.running)return;
+  if(S.mode==='46')captureFooterTarget();
+  if(mode==='cafe')S.cafeBeans=15;
+
+  S.mode=mode;
+
+  $$('.modeBtn').forEach(button=>{
+    button.classList.toggle('active',button.dataset.mode===mode);
+  });
+  $('#timerSection').classList.toggle('hidden',mode==='cafe');
+  $('#timerSection').classList.toggle('sevenTimer',mode==='seven');
+  $('#timerSection').classList.toggle('fourSixTimer',mode==='46');
+  $('#cafePourCard').classList.toggle('hidden',mode!=='cafe');
+  $('.recipe').classList.toggle('sevenRecipe',mode==='seven');
+  $('.recipe').classList.toggle('cafeRecipe',mode==='cafe');
+  $('#settings46').classList.toggle('hidden',mode!=='46');
+  $('#settingsSeven').classList.toggle('hidden',mode!=='seven');
+  $('#settingsCafe').classList.toggle('hidden',mode!=='cafe');
+
+  reset();
+  build();
+  alignFooter();
+}
+
+function showRecipeTemp(show){
+  $('#recipeSep').style.display=show?'':'none';
+  $('#temp').style.display=show?'':'none';
+}
+
+function cafeStyleName(){
+  return S.milkRatio==='3:7'?'バランス':'コーヒー強め';
+}
+
+function build(){
+  if(S.mode==='seven'){
+    showRecipeTemp(true);
+    S.recipe=T7.map((time,index)=>({time,amount:30,temp:index<4?90:75}));
+    $('#water').textContent='210g';
+    $('#temp').textContent='90→75℃';
+    $('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>';
+  }else if(S.mode==='cafe'){
+    showRecipeTemp(false);
+    const total=S.cafeBeans*10;
+    const pour=total/5;
+    S.recipe=[];
+    $('#water').textContent='';
+    $('#summary').textContent=`${S.cafeBeans}g　${cafeStyleName()}`;
+    $('#cafePourMain').textContent=`${fmt(pour)}g × 5投`;
+    active('cafeBeans',S.cafeBeans);
+    calcMilk();
+  }else{
+    showRecipeTemp(true);
+    const total=S.beans*15;
+    const front=total*.4;
+    const back=total*.6;
+    const first=front*S.share/100;
+    const second=front-first;
+    const later=back/S.strength;
+    const pours=[first,second,...Array(S.strength).fill(later)];
+
+    S.recipe=pours.map((amount,index)=>({time:T46[index],amount}));
+    $('#water').textContent=`${total}g`;
+    $('#temp').textContent=`${R[S.roast]}℃`;
+    $('#summary').textContent=`${F[S.flavor]}、${ST[S.strength]}`;
+    active('beans',S.beans);
+    active('roasts',S.roast);
+    active('flavors',S.flavor);
+    active('strengthChoices',S.strength);
+  }
+
+  if(!S.running){
+    S.last=0;
+    view(false);
+  }
+}
+
+function dots(index){
+  $('#dots').innerHTML=S.recipe
+    .map((_,i)=>`<span class="dot ${i<index?'done':''} ${i===index?'current':''}"></span>`)
+    .join('');
+}
+
+function clock(ms){
+  const centiseconds=Math.max(0,Math.floor(ms/10));
+  const minutes=Math.floor(centiseconds/6000);
+  const seconds=Math.floor((centiseconds%6000)/100);
+  const fraction=centiseconds%100;
+  return `${minutes}:${String(seconds).padStart(2,'0')}.${String(fraction).padStart(2,'0')}`;
+}
+
+function endMs(){
+  return S.recipe.length?(S.recipe.at(-1).time+45)*1000:0;
+}
+
+function beep(){
+  try{
+    if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();
+    const context=S.audio;
+    const now=context.currentTime;
+    const oscillator=context.createOscillator();
+    const gain=context.createGain();
+
+    oscillator.frequency.value=760;
+    gain.gain.setValueAtTime(.15,now);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+.2);
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(now+.21);
+  }catch(e){}
+}
+
+function tempBeep(){
+  try{
+    if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();
+    const context=S.audio;
+    const now=context.currentTime;
+
+    [[620,0],[880,.16]].forEach(([frequency,delay])=>{
+      const oscillator=context.createOscillator();
+      const gain=context.createGain();
+      const start=now+delay;
+
+      oscillator.frequency.value=frequency;
+      gain.gain.setValueAtTime(.13,start);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+.12);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.start(start);
+      oscillator.stop(start+.13);
+    });
+  }catch(e){}
+}
+
+function flash(){
+  const card=$('#timerCard');
+  card.classList.remove('alert');
+  void card.offsetWidth;
+  card.classList.add('alert');
+  setTimeout(()=>card.classList.remove('alert'),850);
+}
+
+function finish(){
+  const end=endMs();
+  clearInterval(S.timer);
+  S.timer=null;
+  S.elapsed=end;
+  S.running=false;
+  S.started=null;
+  lockSettings(false);
+  releaseWake();
+  dots(S.recipe.length);
+  $('#clock').textContent=clock(end);
+  $('#timerStep').textContent='';
+  $('#timerAmount').textContent='完成';
+  $('#start').disabled=false;
+  $('#start').textContent='もう一度';
+  $('#pause').disabled=true;
+}
+
+function view(effect=true){
+  if(S.mode==='cafe')return;
+
+  $('#clock').textContent=clock(S.elapsed);
+
+  const seconds=S.elapsed/1000;
+  let index=0;
+  for(let i=0;i<S.recipe.length;i++){
+    if(seconds>=S.recipe[i].time)index=i;
+  }
+
+  if(S.mode==='46'&&S.elapsed>=endMs()){
+    if(S.running){
+      finish();
+    }else{
+      dots(S.recipe.length);
+      $('#timerStep').textContent='';
+      $('#timerAmount').textContent='完成';
+    }
+    return;
+  }
+
+  const changed=index!==S.last;
+  dots(index);
+
+  if(S.mode==='seven'&&seconds>=70&&seconds<80){
+    $('#timerStep').textContent='温度';
+    $('#timerAmount').textContent='75℃へ';
+    if(effect&&S.running&&!S.tempNotified){
+      S.tempNotified=true;
+      tempBeep();
+      flash();
+    }
+  }else{
+    let displayIndex=index;
+    if(S.mode==='46'&&index<S.recipe.length-1&&seconds>=S.recipe[index].time+5){
+      displayIndex=index+1;
+    }
+
+    if(S.mode==='46'){
+      $('#timerStep').textContent=displayIndex===0?'1投目':`次は、${displayIndex+1}投目`;
+    }else{
+      $('#timerStep').textContent=`${displayIndex+1}投目`;
+    }
+
+    $('#timerAmount').textContent=`${fmt(S.recipe[displayIndex].amount)}g`;
+
+    if(effect&&S.running&&changed){
+      beep();
+      flash();
+    }
+  }
+
+  S.last=index;
+}
+
+function start(){
+  if(S.mode==='cafe'||S.running)return;
+
+  if(S.mode==='46'&&S.elapsed>=endMs()){
+    S.elapsed=0;
+    S.last=0;
+  }
+
+  try{
+    if(!S.audio)S.audio=new(window.AudioContext||window.webkitAudioContext)();
+    if(S.audio.state==='suspended')S.audio.resume();
+  }catch(e){}
+
+  S.running=true;
+  S.started=performance.now()-S.elapsed;
+  lockSettings(true);
+  keepAwake();
+  $('#start').disabled=true;
+  $('#pause').disabled=false;
+  $('#start').textContent='抽出中';
+  view(false);
+
+  S.timer=setInterval(()=>{
+    S.elapsed=performance.now()-S.started;
+    view(true);
+  },10);
+}
+
+function stop(resume=true){
+  if(S.running)S.elapsed=performance.now()-S.started;
+  clearInterval(S.timer);
+  S.timer=null;
+  S.running=false;
+  S.started=null;
+  lockSettings(false);
+  releaseWake();
+  $('#start').disabled=false;
+  $('#pause').disabled=true;
+  $('#start').textContent=resume&&S.elapsed>0?'再開':'抽出スタート';
+  view(false);
+}
+
+function reset(){
+  if(S.timer)clearInterval(S.timer);
+  S.timer=null;
+  S.running=false;
+  S.started=null;
+  S.elapsed=0;
+  S.last=0;
+  S.tempNotified=false;
+  lockSettings(false);
+  releaseWake();
+  $('#start').disabled=false;
+  $('#pause').disabled=true;
+  $('#start').textContent='抽出スタート';
+
+  if(S.mode!=='cafe'&&S.recipe.length)view(false);
+}
+
+function calcMilk(){
+  const coffee=S.cafeBeans===15?120:160;
+  const factor=S.milkRatio==='3:7'?7/3:1.5;
+  const milk=Math.round(coffee*factor);
+  const finalAmount=Math.round(coffee+milk);
+
+  $('#milkAmount').textContent=`${milk}g`;
+  $('#finalAmount').textContent=`${finalAmount}g`;
+  $('#cafeExample').textContent=`${S.cafeBeans}gでは抽出液${coffee}gを目安に計算しています。`;
+
+  if(S.mode==='cafe'){
+    $('#summary').textContent=`${S.cafeBeans}g　${cafeStyleName()}　完成量${finalAmount}g`;
+  }
+}
+
+$$('.modeBtn').forEach(button=>{
+  button.onclick=()=>setMode(button.dataset.mode);
+});
+$$('#beans .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.beans=+button.dataset.v;
+    reset();
+    build();
+    alignFooter();
+  };
+});
+$$('#roasts .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.roast=button.dataset.v;
+    build();
+    alignFooter();
+  };
+});
+$$('#flavors .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.flavor=button.dataset.v;
+    S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;
+    reset();
+    build();
+    alignFooter();
+  };
+});
+$$('#strengthChoices .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.strength=+button.dataset.v;
+    reset();
+    build();
+    alignFooter();
+  };
+});
+$$('#cafeBeans .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.cafeBeans=+button.dataset.v;
+    reset();
+    build();
+    alignFooter();
+  };
+});
+$$('#milkRatios .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.milkRatio=button.dataset.v;
+    active('milkRatios',S.milkRatio);
+    calcMilk();
+    alignFooter();
+  };
+});
+
+$('#start').onclick=start;
+$('#pause').onclick=()=>stop(true);
+$('#reset').onclick=reset;
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&S.running)keepAwake();
+});
+
+build();
+requestAnimationFrame(()=>{
+  captureFooterTarget();
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(()=>{
+      if(S.mode==='46')captureFooterTarget();
+      else alignFooter();
+    });
+  }
+});
+
+window.addEventListener('resize',()=>{
+  if(S.mode==='46')captureFooterTarget();
+  else alignFooter();
+});
+
+if('serviceWorker' in navigator){
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=30').catch(()=>{}));
+}
 </script>
 </body>
 </html>

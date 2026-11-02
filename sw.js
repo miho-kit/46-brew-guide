@@ -1,22 +1,36 @@
-const CACHE='brew46-v29';
+const CACHE='brew46-v30';
 const ASSETS=[
-  './','./index.html','./grinder.html','./theme.css?v=18','./coffee-icons.svg','./timer-bg.webp','./footer-banner.webp','./manifest.webmanifest','./apple-touch-icon.png','./icon.svg'
+  './',
+  './index.html',
+  './grinder.html',
+  './theme.css?v=30',
+  './coffee-icons.svg',
+  './timer-bg.webp',
+  './footer-banner.webp?v=30',
+  './manifest.webmanifest?v=19',
+  './apple-touch-icon.png?v=19',
+  './icon.svg'
 ];
+
 self.addEventListener('install',event=>{
   self.skipWaiting();
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));
 });
+
 self.addEventListener('activate',event=>{
   event.waitUntil(
     caches.keys()
-      .then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
+      .then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key))))
       .then(()=>self.clients.claim())
   );
 });
+
 self.addEventListener('fetch',event=>{
   const request=event.request;
   if(request.method!=='GET')return;
+
   const url=new URL(request.url);
+
   if(request.mode==='navigate'){
     event.respondWith(
       fetch(request,{cache:'no-store'})
@@ -29,6 +43,7 @@ self.addEventListener('fetch',event=>{
     );
     return;
   }
+
   if(url.pathname.endsWith('/theme.css')||url.pathname.endsWith('/footer-banner.webp')){
     event.respondWith(
       fetch(request,{cache:'no-store'})
@@ -41,6 +56,7 @@ self.addEventListener('fetch',event=>{
     );
     return;
   }
+
   event.respondWith(
     caches.match(request).then(cached=>cached||fetch(request).then(response=>{
       const copy=response.clone();
