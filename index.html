@@ -26,6 +26,7 @@
 .range{display:none!important}
 .block.tasteBlock{margin-bottom:0!important}
 .block.strengthBlock{margin-top:8px!important}
+.fourSixTimer{min-height:160px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
 .recipe.sevenRecipe .recipeLabel{font-size:0}
 .recipe.sevenRecipe .recipeLabel:after{content:'抽出ポイント';font-size:12.5px;font-weight:600;color:#654a39}
 .recipe.sevenRecipe .recipeStyle{font-weight:700!important;color:#4a2b1b!important}
@@ -36,11 +37,19 @@
 .recipe.cafeRecipe .recipeStyle{text-align:right!important;font-weight:600;color:#654a39!important}
 .recipe.cafeRecipe .recipeMeta{display:none!important}
 .recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:12px!important;line-height:1.42!important}
+#settings46{min-height:438px!important}
 @media(max-width:430px){
   .recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:11.5px!important}
   #settingsSeven{min-height:364px!important}
+  #settings46{min-height:379px!important;padding:7px 10px 8px!important}
+  #settings46 .block+.block{margin-top:7px!important;padding-top:1px!important}
+  #settings46 .block.tasteBlock{margin-top:7px!important}
+  #settings46 .block.strengthBlock{margin-top:5px!important;padding-top:1px!important}
+  #settings46 .block h2{margin-bottom:6px!important}
+  #settings46 .grind{margin-top:6px!important}
+  #settings46 details{margin-top:6px!important;padding-top:5px!important}
 }
-@media(max-width:390px){#settingsSeven{min-height:352px!important}}
+@media(max-width:390px){#settingsSeven{min-height:352px!important}#settings46{min-height:367px!important}}
 #footerSpacer{height:0;pointer-events:none}
 .brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
 .brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:0!important;object-fit:contain!important;object-position:center!important}
