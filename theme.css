@@ -130,3 +130,16 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
 @media(max-width:390px){
  .wrap{padding-top:2px}
 }
+
+/* v20: align cafe footer + unify summary heading typography */
+.recipe:not(.sevenRecipe) .recipeLabel{font-size:12.5px!important;font-weight:600!important;line-height:1.3!important}
+.recipe.sevenRecipe .recipeLabel:after{font-size:12.5px!important;font-weight:600!important;line-height:1.3!important}
+#cafePourCard{min-height:112px!important;padding:8px 10px!important;justify-content:center!important}
+#cafePourCard .timerTitle{margin-bottom:4px!important}
+#cafePourCard .cafePourStatic{min-height:58px!important}
+#cafePourCard .cafePourMain{font-size:32px!important}
+@media(max-width:430px){
+ #cafePourCard{min-height:104px!important;padding:7px 9px!important}
+ #cafePourCard .cafePourStatic{min-height:54px!important}
+ #cafePourCard .cafePourMain{font-size:30px!important}
+}
