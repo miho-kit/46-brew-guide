@@ -10,13 +10,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.webmanifest?v=16">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=16">
-<link rel="stylesheet" href="./theme.css?v=16">
+<link rel="manifest" href="manifest.webmanifest?v=18">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=18">
+<link rel="stylesheet" href="./theme.css?v=18">
+<style id="v18-hotfix">
+.appMark{display:none!important;height:0!important;margin:0!important;padding:0!important}
+.wrap{padding-top:2px!important}
+.timer{color:#4a2b1b!important}
+.timerTitle,.timerAmount,.clock,.timerStep{color:#4a2b1b!important;text-shadow:none!important}
+.timerTitle .icon{color:#4a2b1b!important}
+.dot{border-color:#5a3928!important}
+.dot.current,.dot.done{background:#5a3928!important}
+.brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:hidden!important}
+.brand img{display:block!important;width:106%!important;max-width:none!important;height:auto!important;margin:-2.2% -3%!important}
+</style>
 </head>
 <body>
 <main class="wrap">
-  <div class="appMark" aria-hidden="true"><svg><use href="./coffee-icons.svg#cup"></use></svg></div>
   <nav class="modeSwitch" aria-label="抽出レシピ切替">
     <button class="modeBtn active" data-mode="46">4：6メソッド</button>
     <button class="modeBtn" data-mode="seven">7投式</button>
@@ -96,7 +106,7 @@
     <div class="milkCalc"><p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#cup"></use></svg>仕上げの比率</p><div class="grid2 milkRatios" id="milkRatios"><button class="choice" data-v="3:7">3：7<br><small>バランス</small></button><button class="choice active" data-v="4:6">4：6<br><small>コーヒー強め</small></button></div><div class="calcResults"><div class="calcBox"><div class="calcLabel">加える牛乳</div><div class="calcValue" id="milkAmount">180g</div></div><div class="calcBox"><div class="calcLabel">完成量</div><div class="calcValue" id="finalAmount">300g</div></div></div><p class="note" id="cafeExample">15gでは抽出液120gを目安に計算しています。</p></div>
   </section>
 
-  <footer class="brand"><img src="./footer-banner.webp?v=16" alt="ハンドドリップガイド Brew Guide"></footer>
+  <footer class="brand"><img src="./footer-banner.webp?v=18" alt="ハンドドリップガイド Brew Guide"></footer>
 </main>
 <script>
 const S={mode:'46',beans:15,roast:'medium',flavor:'balanced',strength:2,share:50,cafeBeans:15,milkRatio:'4:6',manualStep:0,elapsed:0,running:false,timer:null,recipe:[],last:0,audio:null,started:null,wake:null,tempNotified:false};
@@ -121,7 +131,7 @@ function stop(resume=true){if(S.running)S.elapsed=performance.now()-S.started;cl
 function reset(){if(S.timer)clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;S.elapsed=0;S.last=0;S.manualStep=0;S.tempNotified=false;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#nextPour').disabled=true;$('#start').textContent='抽出スタート';if(S.mode!=='cafe'&&S.recipe.length)view(false)}
 function nextPour(){}
 function calcMilk(){const c=S.cafeBeans===15?120:160;const factor=S.milkRatio==='3:7'?7/3:1.5,m=Math.round(c*factor),f=Math.round(c+m);$('#milkAmount').textContent=m+'g';$('#finalAmount').textContent=f+'g';$('#cafeExample').textContent=S.cafeBeans+'gでは抽出液'+c+'gを目安に計算しています。'}
-$$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build()});$$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build()});$$('#flavors .choice').forEach(b=>b.onclick=()=>{S.flavor=b.dataset.v;S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;$('#range').value=S.share;reset();build()});$$('#strengthChoices .choice').forEach(b=>b.onclick=()=>{S.strength=+b.dataset.v;reset();build()});$('#range').oninput=e=>{S.share=+e.target.value;S.flavor=S.share<47?'sweet':S.share>53?'bright':'balanced';reset();build()};$$('#cafeBeans .choice').forEach(b=>b.onclick=()=>{S.cafeBeans=+b.dataset.v;reset();build()});$$('#milkRatios .choice').forEach(b=>b.onclick=()=>{S.milkRatio=b.dataset.v;active('milkRatios',S.milkRatio);calcMilk()});$('#start').onclick=start;$('#nextPour').onclick=nextPour;$('#pause').onclick=()=>stop(true);$('#reset').onclick=reset;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.running)keepAwake()});build();if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+$$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build()});$$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build()});$$('#flavors .choice').forEach(b=>b.onclick=()=>{S.flavor=b.dataset.v;S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;$('#range').value=S.share;reset();build()});$$('#strengthChoices .choice').forEach(b=>b.onclick=()=>{S.strength=+b.dataset.v;reset();build()});$('#range').oninput=e=>{S.share=+e.target.value;S.flavor=S.share<47?'sweet':S.share>53?'bright':'balanced';reset();build()};$$('#cafeBeans .choice').forEach(b=>b.onclick=()=>{S.cafeBeans=+b.dataset.v;reset();build()});$$('#milkRatios .choice').forEach(b=>b.onclick=()=>{S.milkRatio=b.dataset.v;active('milkRatios',S.milkRatio);calcMilk()});$('#start').onclick=start;$('#nextPour').onclick=nextPour;$('#pause').onclick=()=>stop(true);$('#reset').onclick=reset;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.running)keepAwake()});build();if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=18').catch(()=>{}));
 </script>
 </body>
 </html>
