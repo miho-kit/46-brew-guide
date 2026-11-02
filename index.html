@@ -26,15 +26,17 @@
 .range{display:none!important}
 .block.tasteBlock{margin-bottom:0!important}
 .block.strengthBlock{margin-top:8px!important}
+.recipe.sevenRecipe{padding:5px 15px!important;min-height:32px!important;gap:7px!important}
 .recipe.sevenRecipe .recipeLabel{font-size:0}
-.recipe.sevenRecipe .recipeLabel:after{content:'抽出ポイント';font-size:12.5px;font-weight:600;color:#654a39}
-.recipe.sevenRecipe .recipeStyle{font-weight:700!important;color:#4a2b1b!important}
+.recipe.sevenRecipe .recipeLabel:after{content:'抽出ポイント';font-size:11.5px;font-weight:600;color:#654a39}
+.recipe.sevenRecipe .recipeStyle{font-weight:700!important;color:#4a2b1b!important;font-size:11px!important;line-height:1.2!important}
 .recipe.sevenRecipe .recipeStyle b{font-weight:700!important;color:#4a2b1b!important}
+.sevenTimer{min-height:175px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
 .recipe.cafeRecipe{grid-template-columns:auto 1fr!important}
 .recipe.cafeRecipe .recipeStyle{text-align:right!important;font-weight:600;color:#654a39!important}
 .recipe.cafeRecipe .recipeMeta{display:none!important}
-.recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:12px!important;line-height:1.42!important}
-@media(max-width:430px){.recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:11.5px!important}}
+.recipe.cafeRecipe .recipeStyle{font-size:12px!important;line-height:1.42!important}
+@media(max-width:430px){.recipe.sevenRecipe{padding:4px 11px!important;min-height:30px!important}.recipe.sevenRecipe .recipeLabel:after{font-size:11px}.recipe.sevenRecipe .recipeStyle{font-size:10.5px!important}.recipe.cafeRecipe .recipeStyle{font-size:11.5px!important}}
 #footerSpacer{height:0;pointer-events:none}
 .brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
 .brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:0!important;object-fit:contain!important;object-position:center!important}
@@ -133,7 +135,7 @@ function releaseWake(){if(!S.wake)return;const lock=S.wake;S.wake=null;lock.rele
 function footerTop(){return $('.brand').getBoundingClientRect().top+window.scrollY}
 function captureFooterTarget(){const spacer=$('#footerSpacer');if(!spacer)return;spacer.style.height='0px';S.footerTarget=footerTop()}
 function alignFooter(){const spacer=$('#footerSpacer');if(!spacer)return;spacer.style.height='0px';if(S.mode==='46'){S.footerTarget=footerTop();return}if(S.footerTarget==null)return;const gap=Math.max(0,S.footerTarget-footerTop());spacer.style.height=gap+'px'}
-function setMode(mode){if(S.running)return;if(S.mode==='46')captureFooterTarget();S.mode=mode;$$('.modeBtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('#timerSection').classList.toggle('hidden',mode==='cafe');$('#timerSection').classList.toggle('sevenTimer',mode==='seven');$('#timerSection').classList.toggle('fourSixTimer',mode==='46');$('#cafePourCard').classList.toggle('hidden',mode!=='cafe');$('.recipe').classList.toggle('sevenRecipe',mode==='seven');$('.recipe').classList.toggle('cafeRecipe',mode==='cafe');$('#settings46').classList.toggle('hidden',mode!=='46');$('#settingsSeven').classList.toggle('hidden',mode!=='seven');$('#settingsCafe').classList.toggle('hidden',mode!=='cafe');$('#nextPour').classList.add('hidden');reset();build();alignFooter()}
+function setMode(mode){if(S.running)return;if(S.mode==='46')captureFooterTarget();if(mode==='cafe')S.cafeBeans=15;S.mode=mode;$$('.modeBtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('#timerSection').classList.toggle('hidden',mode==='cafe');$('#timerSection').classList.toggle('sevenTimer',mode==='seven');$('#timerSection').classList.toggle('fourSixTimer',mode==='46');$('#cafePourCard').classList.toggle('hidden',mode!=='cafe');$('.recipe').classList.toggle('sevenRecipe',mode==='seven');$('.recipe').classList.toggle('cafeRecipe',mode==='cafe');$('#settings46').classList.toggle('hidden',mode!=='46');$('#settingsSeven').classList.toggle('hidden',mode!=='seven');$('#settingsCafe').classList.toggle('hidden',mode!=='cafe');$('#nextPour').classList.add('hidden');reset();build();alignFooter()}
 function showRecipeTemp(show){$('#recipeSep').style.display=show?'':'none';$('#temp').style.display=show?'':'none'}
 function cafeStyleName(){return S.milkRatio==='3:7'?'バランス':'コーヒー強め'}
 function build(){if(S.mode==='seven'){showRecipeTemp(true);S.recipe=T7.map((time,i)=>({time,amount:30,temp:i<4?90:75}));$('#water').textContent='210g';$('#temp').textContent='90→75℃';$('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>'}else if(S.mode==='cafe'){showRecipeTemp(false);const total=S.cafeBeans*10,pour=total/5;S.recipe=[];$('#water').textContent='';$('#summary').textContent=S.cafeBeans+'g　'+cafeStyleName();$('#cafePourMain').textContent=fmt(pour)+'g × 5投';active('cafeBeans',S.cafeBeans);calcMilk()}else{showRecipeTemp(true);let total=S.beans*15,front=total*.4,back=total*.6,a=front*S.share/100,b=front-a,e=back/S.strength,p=[a,b,...Array(S.strength).fill(e)];S.recipe=p.map((amount,i)=>({time:T46[i],amount}));$('#water').textContent=total+'g';$('#temp').textContent=R[S.roast]+'℃';$('#summary').textContent=F[S.flavor]+'、'+ST[S.strength];active('beans',S.beans);active('roasts',S.roast);active('flavors',S.flavor);active('strengthChoices',S.strength)}if(!S.running){S.last=0;view(false)}}
