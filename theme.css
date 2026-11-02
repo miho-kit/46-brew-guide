@@ -112,3 +112,21 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
  .appMark{height:22px}
  .appMark svg{width:21px;height:21px}
 }
+
+/* v18: dark timer text, remove top mark, crop footer frame */
+.appMark{display:none!important;height:0!important;margin:0!important;padding:0!important}
+.timer{color:var(--deep)}
+.timerTitle,.timerAmount,.clock,.timerStep{color:#4a2b1b!important;text-shadow:none!important}
+.timerTitle .icon{color:#4a2b1b}
+.dot{border-color:#5a3928!important}
+.dot.current,.dot.done{background:#5a3928!important}
+.brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:16px;overflow:hidden}
+.brand img{display:block;width:106%;max-width:none;height:auto;margin:-2.2% -3%}
+@media(max-width:430px){
+ .wrap{padding-top:4px}
+ .modeSwitch{margin-top:0}
+ .brand{border-radius:14px}
+}
+@media(max-width:390px){
+ .wrap{padding-top:2px}
+}
