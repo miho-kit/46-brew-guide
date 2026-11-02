@@ -204,3 +204,10 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
 @media(max-width:390px){
   #settingsCafe{min-height:352px!important}
 }
+
+/* v24: zoom footer artwork so embedded white frame is cropped */
+.brand{border-radius:0!important;overflow:hidden!important}
+.brand img{
+  transform:scale(1.10)!important;
+  transform-origin:center center!important;
+}
