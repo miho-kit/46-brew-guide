@@ -10,17 +10,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.webmanifest?v=18">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=18">
+<link rel="manifest" href="manifest.webmanifest?v=19">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
 <link rel="stylesheet" href="./theme.css?v=18">
-<style id="v18-hotfix">
+<style id="v19-hotfix">
 .appMark{display:none!important;height:0!important;margin:0!important;padding:0!important}
 .wrap{padding-top:2px!important}
-.timer{color:#4a2b1b!important}
-.timerTitle,.timerAmount,.clock,.timerStep{color:#4a2b1b!important;text-shadow:none!important}
-.timerTitle .icon{color:#4a2b1b!important}
-.dot{border-color:#5a3928!important}
-.dot.current,.dot.done{background:#5a3928!important}
+.timer{background:#76563f!important;color:#fff!important}
+.timer:before{background:linear-gradient(90deg,rgba(62,35,20,.72),rgba(78,48,29,.58)),url('./timer-bg.webp') center/cover no-repeat!important;opacity:1!important;filter:none!important}
+.timer:after{background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.15))!important}
+.timerTitle,.timerAmount,.clock,.timerStep{color:#fff!important;text-shadow:0 1px 3px rgba(38,20,10,.42)!important}
+.timerTitle .icon{color:#fff!important}
+.dot{border-color:#fff!important}
+.dot.current,.dot.done{background:#fff!important}
+.range{display:none!important}
+.block.tasteBlock{margin-bottom:0!important}
+.block.strengthBlock{margin-top:8px!important}
+.recipe.sevenRecipe .recipeLabel{font-size:0}
+.recipe.sevenRecipe .recipeLabel:after{content:'抽出ポイント';font-size:12.5px;font-weight:600;color:#654a39}
+.recipe.sevenRecipe .recipeStyle{font-weight:700!important;color:#4a2b1b!important}
+.recipe.sevenRecipe .recipeStyle b{font-weight:700!important;color:#4a2b1b!important}
+.recipe.cafeRecipe{grid-template-columns:auto 1fr!important}
+.recipe.cafeRecipe .recipeStyle{text-align:right!important;font-weight:600;color:#654a39!important}
+.recipe.cafeRecipe .recipeMeta{display:none!important}
 .brand{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:hidden!important}
 .brand img{display:block!important;width:106%!important;max-width:none!important;height:auto!important;margin:-2.2% -3%!important}
 </style>
@@ -77,7 +89,6 @@
     <div class="block tasteBlock">
       <h2><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#taste"></use></svg>味</h2>
       <div class="grid3 taste" id="flavors"><button class="choice" data-v="sweet">甘く</button><button class="choice active" data-v="balanced">バランス</button><button class="choice" data-v="bright">明るく</button></div>
-      <div class="range"><div class="rangeTop"><b id="ratio">50：50</b></div><input id="range" type="range" min="35" max="65" value="50" aria-label="1投目と2投目の比率（甘く〜明るく）"><p class="hint">甘く ←　　　　　→ 明るく</p></div>
     </div>
     <div class="block strengthBlock">
       <h2><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#dripper"></use></svg>濃さ</h2>
@@ -112,12 +123,13 @@
 const S={mode:'46',beans:15,roast:'medium',flavor:'balanced',strength:2,share:50,cafeBeans:15,milkRatio:'4:6',manualStep:0,elapsed:0,running:false,timer:null,recipe:[],last:0,audio:null,started:null,wake:null,tempNotified:false};
 const R={light:93,medium:88,dark:83},F={sweet:'甘く',balanced:'バランス',bright:'明るく'},ST={1:'軽め',2:'中間',3:'基本'},T46=[0,45,90,130,160],T7=[0,20,40,60,80,100,120],$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],fmt=n=>Math.round(n*10)%10?Number(n).toFixed(1):String(Math.round(n));
 function active(id,v){$$('#'+id+' .choice').forEach(b=>b.classList.toggle('active',b.dataset.v==v))}
-function lockSettings(locked){$$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,.modeBtn').forEach(el=>el.disabled=locked);$('#range').disabled=locked}
+function lockSettings(locked){$$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,.modeBtn').forEach(el=>el.disabled=locked)}
 async function keepAwake(){if(!('wakeLock'in navigator)||S.wake)return;try{S.wake=await navigator.wakeLock.request('screen');S.wake.addEventListener('release',()=>{S.wake=null})}catch(e){S.wake=null}}
 function releaseWake(){if(!S.wake)return;const lock=S.wake;S.wake=null;lock.release().catch(()=>{})}
-function setMode(mode){if(S.running)return;S.mode=mode;$$('.modeBtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('#timerSection').classList.toggle('hidden',mode==='cafe');$('#timerSection').classList.toggle('sevenTimer',mode==='seven');$('#timerSection').classList.toggle('fourSixTimer',mode==='46');$('#cafePourCard').classList.toggle('hidden',mode!=='cafe');$('.recipe').classList.toggle('sevenRecipe',mode==='seven');$('#settings46').classList.toggle('hidden',mode!=='46');$('#settingsSeven').classList.toggle('hidden',mode!=='seven');$('#settingsCafe').classList.toggle('hidden',mode!=='cafe');$('#nextPour').classList.add('hidden');reset();build()}
+function setMode(mode){if(S.running)return;S.mode=mode;$$('.modeBtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('#timerSection').classList.toggle('hidden',mode==='cafe');$('#timerSection').classList.toggle('sevenTimer',mode==='seven');$('#timerSection').classList.toggle('fourSixTimer',mode==='46');$('#cafePourCard').classList.toggle('hidden',mode!=='cafe');$('.recipe').classList.toggle('sevenRecipe',mode==='seven');$('.recipe').classList.toggle('cafeRecipe',mode==='cafe');$('#settings46').classList.toggle('hidden',mode!=='46');$('#settingsSeven').classList.toggle('hidden',mode!=='seven');$('#settingsCafe').classList.toggle('hidden',mode!=='cafe');$('#nextPour').classList.add('hidden');reset();build()}
 function showRecipeTemp(show){$('#recipeSep').style.display=show?'':'none';$('#temp').style.display=show?'':'none'}
-function build(){if(S.mode==='seven'){showRecipeTemp(true);S.recipe=T7.map((time,i)=>({time,amount:30,temp:i<4?90:75}));$('#water').textContent='210g';$('#temp').textContent='90→75℃';$('#summary').innerHTML='<b>全体 210g</b><span>4投目まで 90℃</span><span>5投目から 75℃</span>'}else if(S.mode==='cafe'){showRecipeTemp(false);const total=S.cafeBeans*10,pour=total/5;S.recipe=[];$('#water').textContent=fmt(pour)+'g × 5投';$('#summary').textContent=S.cafeBeans+'g';$('#cafePourMain').textContent=fmt(pour)+'g × 5投';active('cafeBeans',S.cafeBeans);calcMilk()}else{showRecipeTemp(true);let total=S.beans*15,front=total*.4,back=total*.6,a=front*S.share/100,b=front-a,e=back/S.strength,p=[a,b,...Array(S.strength).fill(e)];S.recipe=p.map((amount,i)=>({time:T46[i],amount}));$('#water').textContent=total+'g';$('#temp').textContent=R[S.roast]+'℃';$('#ratio').textContent=S.share+'：'+(100-S.share);$('#summary').textContent=F[S.flavor]+'、'+ST[S.strength];active('beans',S.beans);active('roasts',S.roast);active('flavors',S.flavor);active('strengthChoices',S.strength)}if(!S.running){S.last=0;view(false)}}
+function cafeStyleName(){return S.milkRatio==='3:7'?'バランス':'コーヒー強め'}
+function build(){if(S.mode==='seven'){showRecipeTemp(true);S.recipe=T7.map((time,i)=>({time,amount:30,temp:i<4?90:75}));$('#water').textContent='210g';$('#temp').textContent='90→75℃';$('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>'}else if(S.mode==='cafe'){showRecipeTemp(false);const total=S.cafeBeans*10,pour=total/5;S.recipe=[];$('#water').textContent='';$('#summary').textContent=S.cafeBeans+'g　'+cafeStyleName();$('#cafePourMain').textContent=fmt(pour)+'g × 5投';active('cafeBeans',S.cafeBeans);calcMilk()}else{showRecipeTemp(true);let total=S.beans*15,front=total*.4,back=total*.6,a=front*S.share/100,b=front-a,e=back/S.strength,p=[a,b,...Array(S.strength).fill(e)];S.recipe=p.map((amount,i)=>({time:T46[i],amount}));$('#water').textContent=total+'g';$('#temp').textContent=R[S.roast]+'℃';$('#summary').textContent=F[S.flavor]+'、'+ST[S.strength];active('beans',S.beans);active('roasts',S.roast);active('flavors',S.flavor);active('strengthChoices',S.strength)}if(!S.running){S.last=0;view(false)}}
 function dots(i){$('#dots').innerHTML=S.recipe.map((_,x)=>`<span class="dot ${x<i?'done':''} ${x===i?'current':''}"></span>`).join('')}
 function clock(ms){let x=Math.max(0,Math.floor(ms/10)),m=Math.floor(x/6000),s=Math.floor((x%6000)/100),c=x%100;return `${m}:${String(s).padStart(2,'0')}.${String(c).padStart(2,'0')}`}
 function endMs(){return S.recipe.length?(S.recipe.at(-1).time+45)*1000:0}
@@ -130,8 +142,8 @@ function start(){if(S.mode==='cafe'||S.running)return;if(S.mode==='46'&&S.elapse
 function stop(resume=true){if(S.running)S.elapsed=performance.now()-S.started;clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#nextPour').disabled=true;$('#start').textContent=resume&&S.elapsed>0?'再開':'抽出スタート';view(false)}
 function reset(){if(S.timer)clearInterval(S.timer);S.timer=null;S.running=false;S.started=null;S.elapsed=0;S.last=0;S.manualStep=0;S.tempNotified=false;lockSettings(false);releaseWake();$('#start').disabled=false;$('#pause').disabled=true;$('#nextPour').disabled=true;$('#start').textContent='抽出スタート';if(S.mode!=='cafe'&&S.recipe.length)view(false)}
 function nextPour(){}
-function calcMilk(){const c=S.cafeBeans===15?120:160;const factor=S.milkRatio==='3:7'?7/3:1.5,m=Math.round(c*factor),f=Math.round(c+m);$('#milkAmount').textContent=m+'g';$('#finalAmount').textContent=f+'g';$('#cafeExample').textContent=S.cafeBeans+'gでは抽出液'+c+'gを目安に計算しています。'}
-$$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build()});$$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build()});$$('#flavors .choice').forEach(b=>b.onclick=()=>{S.flavor=b.dataset.v;S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;$('#range').value=S.share;reset();build()});$$('#strengthChoices .choice').forEach(b=>b.onclick=()=>{S.strength=+b.dataset.v;reset();build()});$('#range').oninput=e=>{S.share=+e.target.value;S.flavor=S.share<47?'sweet':S.share>53?'bright':'balanced';reset();build()};$$('#cafeBeans .choice').forEach(b=>b.onclick=()=>{S.cafeBeans=+b.dataset.v;reset();build()});$$('#milkRatios .choice').forEach(b=>b.onclick=()=>{S.milkRatio=b.dataset.v;active('milkRatios',S.milkRatio);calcMilk()});$('#start').onclick=start;$('#nextPour').onclick=nextPour;$('#pause').onclick=()=>stop(true);$('#reset').onclick=reset;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.running)keepAwake()});build();if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=18').catch(()=>{}));
+function calcMilk(){const c=S.cafeBeans===15?120:160;const factor=S.milkRatio==='3:7'?7/3:1.5,m=Math.round(c*factor),f=Math.round(c+m);$('#milkAmount').textContent=m+'g';$('#finalAmount').textContent=f+'g';$('#cafeExample').textContent=S.cafeBeans+'gでは抽出液'+c+'gを目安に計算しています。';if(S.mode==='cafe')$('#summary').textContent=S.cafeBeans+'g　'+cafeStyleName()}
+$$('.modeBtn').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$$('#beans .choice').forEach(b=>b.onclick=()=>{S.beans=+b.dataset.v;reset();build()});$$('#roasts .choice').forEach(b=>b.onclick=()=>{S.roast=b.dataset.v;build()});$$('#flavors .choice').forEach(b=>b.onclick=()=>{S.flavor=b.dataset.v;S.share=S.flavor==='sweet'?40:S.flavor==='bright'?60:50;reset();build()});$$('#strengthChoices .choice').forEach(b=>b.onclick=()=>{S.strength=+b.dataset.v;reset();build()});$$('#cafeBeans .choice').forEach(b=>b.onclick=()=>{S.cafeBeans=+b.dataset.v;reset();build()});$$('#milkRatios .choice').forEach(b=>b.onclick=()=>{S.milkRatio=b.dataset.v;active('milkRatios',S.milkRatio);calcMilk()});$('#start').onclick=start;$('#nextPour').onclick=nextPour;$('#pause').onclick=()=>stop(true);$('#reset').onclick=reset;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.running)keepAwake()});build();if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=18').catch(()=>{}));
 </script>
 </body>
 </html>
