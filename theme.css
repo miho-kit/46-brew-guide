@@ -61,11 +61,11 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
 .timerTitle{margin-bottom:2px;padding-right:42%}
 .timerCard{padding:0 6px 3px}
 .actions{margin-top:6px}
-#settingsSeven .infoGrid>.infoItem.wide:last-child{display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:'label label label' 'value button .' 'sub sub sub';align-items:center;column-gap:8px;row-gap:2px;padding-top:7px;padding-bottom:7px}
-#settingsSeven .infoGrid>.infoItem.wide:last-child .infoLabel{grid-area:label;margin:0}
-#settingsSeven .infoGrid>.infoItem.wide:last-child .infoValue{grid-area:value}
+#settingsSeven .infoGrid>.infoItem.wide:last-child{display:grid;grid-template-columns:auto auto auto 1fr;grid-template-areas:'label value button .' 'sub sub sub sub';align-items:center;column-gap:8px;row-gap:1px;padding:6px 10px}
+#settingsSeven .infoGrid>.infoItem.wide:last-child .infoLabel{grid-area:label;margin:0;white-space:nowrap}
+#settingsSeven .infoGrid>.infoItem.wide:last-child .infoValue{grid-area:value;white-space:nowrap}
 #settingsSeven .infoGrid>.infoItem.wide:last-child .infoCompare{grid-area:button;margin:0;min-height:27px;padding:3px 10px;white-space:nowrap}
-#settingsSeven .infoGrid>.infoItem.wide:last-child .infoSub{grid-area:sub;margin:0}
+#settingsSeven .infoGrid>.infoItem.wide:last-child .infoSub{grid-area:sub;margin:1px 0 0}
 @media(max-width:430px){
  .wrap{padding:8px 10px 14px}
  .appMark{height:31px}.appMark svg{width:25px;height:25px}
@@ -83,8 +83,9 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
  .infoGrid{gap:6px}
  .infoItem{padding:7px 9px}
  .timelineWrap{margin-top:8px;padding-top:7px}
- #settingsSeven .infoGrid>.infoItem.wide:last-child{padding:6px 9px;column-gap:7px;row-gap:1px}
- #settingsSeven .infoGrid>.infoItem.wide:last-child .infoCompare{min-height:26px;font-size:10px;padding:3px 9px}
+ #settingsSeven .infoGrid>.infoItem.wide:last-child{padding:5px 9px;column-gap:7px;row-gap:0}
+ #settingsSeven .infoGrid>.infoItem.wide:last-child .infoCompare{min-height:25px;font-size:10px;padding:2px 8px}
+ #settingsSeven .infoGrid>.infoItem.wide:last-child .infoSub{font-size:10px}
  #settings46,#settingsSeven,#settingsCafe{min-height:420px}
  .brand{margin-top:8px}
 }
