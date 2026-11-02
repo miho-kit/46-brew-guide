@@ -1,4 +1,4 @@
-const CACHE='brew46-v17';
+const CACHE='brew46-v18';
 const ASSETS=[
   './','./index.html','./grinder.html','./theme.css','./coffee-icons.svg','./timer-bg.webp','./footer-banner.webp','./manifest.webmanifest','./apple-touch-icon.png','./icon.svg'
 ];
