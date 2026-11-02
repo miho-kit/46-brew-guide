@@ -152,3 +152,38 @@ button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:tran
   box-shadow:0 4px 10px rgba(65,39,24,.10)!important;
 }
 .actions .primary:before{color:#4a2b1b!important}
+
+/* v22: match cafe recipe card to timer image background */
+#cafePourCard{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:#76563f!important;
+  color:#fff!important;
+}
+#cafePourCard:before{
+  display:block!important;
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(62,35,20,.72),rgba(78,48,29,.58)),url('./timer-bg.webp') center/cover no-repeat!important;
+  z-index:-2!important;
+}
+#cafePourCard:after{
+  display:block!important;
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.15))!important;
+  z-index:-1!important;
+}
+#cafePourCard .timerTitle,
+#cafePourCard .timerTitle .icon,
+#cafePourCard .cafePourMain{
+  color:#fff!important;
+  text-shadow:0 1px 3px rgba(38,20,10,.42)!important;
+}
+#cafePourCard .cafePourStatic{
+  background:transparent!important;
+  border-color:rgba(255,255,255,.32)!important;
+}
