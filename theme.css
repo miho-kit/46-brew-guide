@@ -359,21 +359,26 @@ button{
   font-weight:600;
   text-decoration:none;
 }
-.settings details{
+.settings details,
+.fixedSettings details{
   margin-top:10px;
   padding:10px 3px 0;
   border-top:1px solid rgba(86,50,31,.08);
 }
-.settings summary{
+.settings summary,
+.fixedSettings summary{
   list-style:none;
   color:#5f4434;
   cursor:pointer;
   font-size:12.5px;
   font-weight:500;
 }
-.settings summary::-webkit-details-marker{display:none}
-.settings summary:before{content:'▶';margin-right:7px;font-size:9px}
-.settings details[open] summary:before{content:'▼'}
+.settings summary::-webkit-details-marker,
+.fixedSettings summary::-webkit-details-marker{display:none}
+.settings summary:before,
+.fixedSettings summary:before{content:'▶';margin-right:7px;font-size:9px}
+.settings details[open] summary:before,
+.fixedSettings details[open] summary:before{content:'▼'}
 .details{padding:5px 3px 0;color:var(--muted);font-size:11px}
 
 .fixedSettings{padding:14px 13px;background:rgba(255,250,243,.96)}
@@ -491,7 +496,7 @@ button{
   #settings46 .block.strengthBlock{margin-top:5px;padding-top:1px}
   #settings46 .block h2{margin-bottom:6px}
   #settings46 .grind{margin-top:6px}
-  #settings46 details{margin-top:6px;padding-top:5px}
+  #settings46 details,#settingsSeven details{margin-top:6px;padding-top:5px}
   #settingsSeven,#settingsCafe{min-height:364px}
   #settingsSeven .infoGrid>.infoItem.wide:last-child{padding:5px 9px;column-gap:7px;row-gap:0}
   #settingsSeven .infoGrid>.infoItem.wide:last-child .infoCompare{min-height:25px;padding:2px 8px;font-size:10px}
