@@ -168,7 +168,8 @@ const S={
 const R={light:93,medium:88,dark:83};
 const F={sweet:'甘く',balanced:'バランス',bright:'明るく'};
 const ST={1:'軽め',2:'中間',3:'基本'};
-const T46=[0,45,90,130,160];
+const T46_REGULAR=[0,45,90,130,160];
+const T46_SMALL=[0,35,70,100,120];
 const T7=[0,20,40,60,80,100,120];
 
 const $=selector=>document.querySelector(selector);
@@ -290,7 +291,8 @@ function build(){
     const later=back/S.strength;
     const pours=[first,second,...Array(S.strength).fill(later)];
 
-    S.recipe=pours.map((amount,index)=>({time:T46[index],amount}));
+    const times=S.beans===15?T46_SMALL:T46_REGULAR;
+    S.recipe=pours.map((amount,index)=>({time:times[index],amount}));
     $('#water').textContent=`${total}g`;
     $('#temp').textContent=`${R[S.roast]}℃`;
     $('#summary').textContent=`${F[S.flavor]}、${ST[S.strength]}`;
@@ -321,7 +323,9 @@ function clock(ms){
 }
 
 function endMs(){
-  return S.recipe.length?(S.recipe.at(-1).time+45)*1000:0;
+  if(!S.recipe.length)return 0;
+  const drainTime=S.mode==='46'?(S.beans===15?40:50):45;
+  return(S.recipe.at(-1).time+drainTime)*1000;
 }
 
 function beep(){
