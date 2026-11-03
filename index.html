@@ -27,7 +27,10 @@
     <div class="timerCard" id="timerCard">
       <div class="dots" id="dots"></div>
       <div class="readout">
-        <div class="amountWrap"><span class="timerStep" id="timerStep">1投目</span><span class="timerAmount" id="timerAmount">45g</span></div>
+        <div class="amountWrap">
+          <div class="currentPour"><span class="timerStep" id="timerStep">現在：1投目</span><span class="timerAmount" id="timerAmount">45g</span></div>
+          <span class="timerNext" id="timerNext">次：2投目・45g</span>
+        </div>
         <div class="clock" id="clock">0:00.00</div>
       </div>
     </div>
@@ -398,6 +401,7 @@ function finish(){
   $('#clock').textContent=clock(end);
   $('#timerStep').textContent='';
   $('#timerAmount').textContent='完成';
+  $('#timerNext').textContent='';
   $('#start').disabled=false;
   $('#start').textContent='もう一度';
   $('#pause').disabled=true;
@@ -421,6 +425,7 @@ function view(effect=true){
       dots(S.recipe.length);
       $('#timerStep').textContent='';
       $('#timerAmount').textContent='完成';
+      $('#timerNext').textContent='';
     }
     return;
   }
@@ -431,24 +436,24 @@ function view(effect=true){
   if(S.mode==='seven'&&seconds>=70&&seconds<80){
     $('#timerStep').textContent='温度';
     $('#timerAmount').textContent='75℃へ';
+    $('#timerNext').textContent='';
     if(effect&&S.running&&!S.tempNotified){
       S.tempNotified=true;
       tempBeep();
       flash();
     }
   }else{
-    let displayIndex=index;
-    if(S.mode==='46'&&index<S.recipe.length-1&&seconds>=S.recipe[index].time+5){
-      displayIndex=index+1;
-    }
-
     if(S.mode==='46'){
-      $('#timerStep').textContent=displayIndex===0?'1投目':`次は、${displayIndex+1}投目`;
+      $('#timerStep').textContent=`現在：${index+1}投目`;
+      $('#timerAmount').textContent=`${fmt(S.recipe[index].amount)}g`;
+      $('#timerNext').textContent=index<S.recipe.length-1
+        ?`次：${index+2}投目・${fmt(S.recipe[index+1].amount)}g`
+        :'次：抽出完了';
     }else{
-      $('#timerStep').textContent=`${displayIndex+1}投目`;
+      $('#timerStep').textContent=`${index+1}投目`;
+      $('#timerAmount').textContent=`${fmt(S.recipe[index].amount)}g`;
+      $('#timerNext').textContent='';
     }
-
-    $('#timerAmount').textContent=`${fmt(S.recipe[displayIndex].amount)}g`;
 
     if(effect&&S.running&&changed){
       beep();
