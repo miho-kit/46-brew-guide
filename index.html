@@ -252,7 +252,7 @@ function active(id,value){
 }
 
 function lockSettings(locked){
-  $('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,#hybridBeans .choice,.modeBtn')
+  $$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,#hybridBeans .choice,.modeBtn')
     .forEach(element=>{element.disabled=locked});
 }
 
@@ -698,7 +698,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=33').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=34').catch(()=>{}));
 }
 </script>
 </body>
