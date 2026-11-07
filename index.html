@@ -211,7 +211,7 @@ const T46_REGULAR=[0,45,90,130,160];
 const T46_SMALL=[0,35,70,100,120];
 const T7=[0,20,40,60,80,100,120];
 const HYBRID_TIMES={
-  15:[0,30,80,95,120,155],
+  15:[0,35,85,100,125,160],
   20:[0,40,90,105,130,165]
 };
 
@@ -227,7 +227,7 @@ function makeHybridRecipe(){
   const second=beans*6;
   const third=beans*10;
   const total=beans*15;
-  const finish=times.at(-1)+45;
+  const finish=beans===15?180:times.at(-1)+45;
   return[
     {time:times[0],label:'スイッチ閉',amount:`${bloom}g`,detail:`閉じて${bloom}gまで注ぐ（蒸らし）`,next:`次 ${stepClock(times[1])}：開いて${second}g`},
     {time:times[1],label:'スイッチ開',amount:`${second}g`,detail:`開いて${second}gまで注ぐ`,next:`次 ${stepClock(times[2])}：${third}gまで注ぐ`},
@@ -239,7 +239,7 @@ function makeHybridRecipe(){
 }
 
 function renderHybridTimeline(){
-  const finish=S.recipe.at(-1).time+45;
+  const finish=S.hybridBeans===15?180:S.recipe.at(-1).time+45;
   $('#hybridSteps').innerHTML=S.recipe.map(step=>`
     <div class="hybridStep"><b>${stepClock(step.time)}</b><span>${step.detail}</span></div>
   `).join('')+`<div class="hybridStep"><b>${stepClock(finish)}</b><span>ドリッパーを外して完成</span></div>`;
@@ -404,6 +404,7 @@ function clock(ms){
 
 function endMs(){
   if(!S.recipe.length)return 0;
+  if(S.mode==='hybrid'&&S.hybridBeans===15)return 180000;
   const drainTime=S.mode==='46'?(S.beans===15?40:50):45;
   return(S.recipe.at(-1).time+drainTime)*1000;
 }
@@ -697,7 +698,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=31').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=32').catch(()=>{}));
 }
 </script>
 </body>
