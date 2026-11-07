@@ -1,12 +1,12 @@
-const CACHE='brew46-v30';
+const CACHE='brew46-v31';
 const ASSETS=[
   './',
   './index.html',
   './grinder.html',
-  './theme.css?v=30',
+  './theme.css?v=31',
   './coffee-icons.svg',
   './timer-bg.webp',
-  './footer-banner.webp?v=30',
+  './footer-banner.webp?v=31',
   './manifest.webmanifest?v=19',
   './apple-touch-icon.png?v=19',
   './icon.svg'

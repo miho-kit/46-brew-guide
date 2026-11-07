@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest?v=19">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
-<link rel="stylesheet" href="./theme.css?v=30">
+<link rel="stylesheet" href="./theme.css?v=31">
 </head>
 <body>
 <main class="wrap">
@@ -20,6 +20,7 @@
     <button class="modeBtn active" data-mode="46">4：6メソッド</button>
     <button class="modeBtn" data-mode="seven">7投式</button>
     <button class="modeBtn" data-mode="cafe">カフェオレ</button>
+    <button class="modeBtn hybridModeBtn" data-mode="hybrid">ニュー<br>ハイブリッド</button>
   </nav>
 
   <section class="timer fourSixTimer" id="timerSection">
@@ -127,6 +128,31 @@
     </details>
   </section>
 
+  <section class="card fixedSettings hidden" id="settingsHybrid">
+    <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
+    <div class="grid2 hybridBeans" id="hybridBeans">
+      <button class="choice bean" data-v="15"><span class="beanMain">15g</span><span class="beanWater">225g</span></button>
+      <button class="choice bean active" data-v="20"><span class="beanMain">20g</span><span class="beanWater">300g</span></button>
+    </div>
+    <div class="infoGrid hybridInfoGrid">
+      <div class="infoItem"><div class="infoLabel">ドリッパー</div><div class="infoValue">HARIO SWITCH</div></div>
+      <div class="infoItem"><div class="infoLabel">後半の湯温</div><div class="infoValue">70℃</div></div>
+    </div>
+    <div class="timelineWrap hybridTimeline">
+      <div class="timelineLabel">抽出タイミング</div>
+      <div class="hybridSteps" id="hybridSteps"></div>
+    </div>
+    <details>
+      <summary>ニューハイブリッドメソッドの考え方</summary>
+      <div class="details">
+        <p>1. 最初はスイッチを閉じ、浸漬状態で蒸らして甘さを引き出します。</p>
+        <p>2. スイッチを開いて透過抽出へ切り替え、前半200gまで注ぎます。</p>
+        <p>3. 後半はお湯を70℃に下げ、再びスイッチを閉じて300gまで浸漬します。</p>
+        <p>4. 2:45に開いて落とし、苦味を抑えながら甘さと質感を整えます。</p>
+      </div>
+    </details>
+  </section>
+
   <section class="card fixedSettings hidden" id="settingsCafe">
     <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
     <div class="grid2" id="cafeBeans">
@@ -164,6 +190,7 @@ const S={
   strength:2,
   share:50,
   cafeBeans:15,
+  hybridBeans:20,
   milkRatio:'4:6',
   elapsed:0,
   running:false,
@@ -183,10 +210,40 @@ const ST={1:'軽め',2:'中間',3:'基本'};
 const T46_REGULAR=[0,45,90,130,160];
 const T46_SMALL=[0,35,70,100,120];
 const T7=[0,20,40,60,80,100,120];
+const HYBRID_TIMES={
+  15:[0,30,80,95,120,155],
+  20:[0,40,90,105,130,165]
+};
 
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 const fmt=n=>Math.round(n*10)%10?Number(n).toFixed(1):String(Math.round(n));
+const stepClock=seconds=>`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`;
+
+function makeHybridRecipe(){
+  const beans=S.hybridBeans;
+  const times=HYBRID_TIMES[beans];
+  const bloom=beans*2;
+  const second=beans*6;
+  const third=beans*10;
+  const total=beans*15;
+  const finish=times.at(-1)+45;
+  return[
+    {time:times[0],label:'スイッチ閉',amount:`${bloom}g`,detail:`閉じて${bloom}gまで注ぐ（蒸らし）`,next:`次 ${stepClock(times[1])}：開いて${second}g`},
+    {time:times[1],label:'スイッチ開',amount:`${second}g`,detail:`開いて${second}gまで注ぐ`,next:`次 ${stepClock(times[2])}：${third}gまで注ぐ`},
+    {time:times[2],label:'注湯',amount:`${third}g`,detail:`${third}gまで注ぐ`,next:`次 ${stepClock(times[3])}：お湯を70℃へ`},
+    {time:times[3],kind:'temp',label:'湯温',amount:'70℃',detail:'お湯を70℃に冷ます',next:`次 ${stepClock(times[4])}：閉じて${total}g`},
+    {time:times[4],label:'スイッチ閉',amount:`${total}g`,detail:`閉じて${total}gまで注ぐ`,next:`次 ${stepClock(times[5])}：スイッチを開く`},
+    {time:times[5],label:'スイッチ開',amount:'待つ',detail:'スイッチを開ける',next:`次 ${stepClock(finish)}：ドリッパーを外す`}
+  ];
+}
+
+function renderHybridTimeline(){
+  const finish=S.recipe.at(-1).time+45;
+  $('#hybridSteps').innerHTML=S.recipe.map(step=>`
+    <div class="hybridStep"><b>${stepClock(step.time)}</b><span>${step.detail}</span></div>
+  `).join('')+`<div class="hybridStep"><b>${stepClock(finish)}</b><span>ドリッパーを外して完成</span></div>`;
+}
 
 function active(id,value){
   $$(`#${id} .choice`).forEach(button=>{
@@ -195,7 +252,7 @@ function active(id,value){
 }
 
 function lockSettings(locked){
-  $$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,.modeBtn')
+  $('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,#hybridBeans .choice,.modeBtn')
     .forEach(element=>{element.disabled=locked});
 }
 
@@ -255,11 +312,14 @@ function setMode(mode){
   $('#timerSection').classList.toggle('hidden',mode==='cafe');
   $('#timerSection').classList.toggle('sevenTimer',mode==='seven');
   $('#timerSection').classList.toggle('fourSixTimer',mode==='46');
+  $('#timerSection').classList.toggle('hybridTimer',mode==='hybrid');
   $('#cafePourCard').classList.toggle('hidden',mode!=='cafe');
   $('.recipe').classList.toggle('sevenRecipe',mode==='seven');
   $('.recipe').classList.toggle('cafeRecipe',mode==='cafe');
+  $('.recipe').classList.toggle('hybridRecipe',mode==='hybrid');
   $('#settings46').classList.toggle('hidden',mode!=='46');
   $('#settingsSeven').classList.toggle('hidden',mode!=='seven');
+  $('#settingsHybrid').classList.toggle('hidden',mode!=='hybrid');
   $('#settingsCafe').classList.toggle('hidden',mode!=='cafe');
 
   reset();
@@ -283,6 +343,14 @@ function build(){
     $('#water').textContent='210g';
     $('#temp').textContent='90→75℃';
     $('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>';
+  }else if(S.mode==='hybrid'){
+    showRecipeTemp(true);
+    S.recipe=makeHybridRecipe();
+    $('#water').textContent=`${S.hybridBeans*15}g`;
+    $('#temp').textContent='後半70℃';
+    $('#summary').textContent='浸漬 → 透過 → 浸漬';
+    active('hybridBeans',S.hybridBeans);
+    renderHybridTimeline();
   }else if(S.mode==='cafe'){
     showRecipeTemp(false);
     const total=S.cafeBeans*10;
@@ -418,7 +486,7 @@ function view(effect=true){
     if(seconds>=S.recipe[i].time)index=i;
   }
 
-  if(S.mode==='46'&&S.elapsed>=endMs()){
+  if((S.mode==='46'||S.mode==='hybrid')&&S.elapsed>=endMs()){
     if(S.running){
       finish();
     }else{
@@ -449,6 +517,11 @@ function view(effect=true){
       $('#timerNext').textContent=index<S.recipe.length-1
         ?`次：${index+2}投目・${fmt(S.recipe[index+1].amount)}g`
         :'次：抽出完了';
+    }else if(S.mode==='hybrid'){
+      const step=S.recipe[index];
+      $('#timerStep').textContent=step.label;
+      $('#timerAmount').textContent=step.amount;
+      $('#timerNext').textContent=step.next;
     }else{
       $('#timerStep').textContent=`${index+1}投目`;
       $('#timerAmount').textContent=`${fmt(S.recipe[index].amount)}g`;
@@ -456,7 +529,8 @@ function view(effect=true){
     }
 
     if(effect&&S.running&&changed){
-      beep();
+      if(S.mode==='hybrid'&&S.recipe[index].kind==='temp')tempBeep();
+      else beep();
       flash();
     }
   }
@@ -467,7 +541,7 @@ function view(effect=true){
 function start(){
   if(S.mode==='cafe'||S.running)return;
 
-  if(S.mode==='46'&&S.elapsed>=endMs()){
+  if((S.mode==='46'||S.mode==='hybrid')&&S.elapsed>=endMs()){
     S.elapsed=0;
     S.last=0;
   }
@@ -581,7 +655,15 @@ $$('#cafeBeans .choice').forEach(button=>{
     alignFooter();
   };
 });
-$$('#milkRatios .choice').forEach(button=>{
+$('#hybridBeans .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.hybridBeans=+button.dataset.v;
+    reset();
+    build();
+    alignFooter();
+  };
+});
+$('#milkRatios .choice').forEach(button=>{
   button.onclick=()=>{
     S.milkRatio=button.dataset.v;
     active('milkRatios',S.milkRatio);
@@ -615,7 +697,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=30').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=31').catch(()=>{}));
 }
 </script>
 </body>
