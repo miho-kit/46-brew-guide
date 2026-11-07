@@ -656,7 +656,7 @@ $$('#cafeBeans .choice').forEach(button=>{
     alignFooter();
   };
 });
-$('#hybridBeans .choice').forEach(button=>{
+$$('#hybridBeans .choice').forEach(button=>{
   button.onclick=()=>{
     S.hybridBeans=+button.dataset.v;
     reset();
@@ -664,7 +664,7 @@ $('#hybridBeans .choice').forEach(button=>{
     alignFooter();
   };
 });
-$('#milkRatios .choice').forEach(button=>{
+$$('#milkRatios .choice').forEach(button=>{
   button.onclick=()=>{
     S.milkRatio=button.dataset.v;
     active('milkRatios',S.milkRatio);
@@ -698,7 +698,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=34').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=35').catch(()=>{}));
 }
 </script>
 </body>
