@@ -1,4 +1,4 @@
-const CACHE='brew46-v35';
+const CACHE='brew46-v36';
 const ASSETS=[
   './',
   './index.html',

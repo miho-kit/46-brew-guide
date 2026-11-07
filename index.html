@@ -19,8 +19,8 @@
   <nav class="modeSwitch" aria-label="抽出レシピ切替">
     <button class="modeBtn active" data-mode="46">4：6メソッド</button>
     <button class="modeBtn" data-mode="seven">7投式</button>
-    <button class="modeBtn" data-mode="cafe">カフェオレ</button>
     <button class="modeBtn hybridModeBtn" data-mode="hybrid">ニュー<br>ハイブリッド</button>
+    <button class="modeBtn" data-mode="cafe">カフェオレ</button>
   </nav>
 
   <section class="timer fourSixTimer" id="timerSection">
@@ -698,7 +698,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=35').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=36').catch(()=>{}));
 }
 </script>
 </body>
