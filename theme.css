@@ -208,7 +208,7 @@ button{
   justify-content:center;
 }
 .fourSixTimer .actions,.sevenTimer .actions,.hybridTimer .actions,.fiveTimer .actions{margin-top:0;transform:translateY(12px)}
-.hybridTimer .timerNext,.fiveTimer .timerNext{margin-top:7px;line-height:1.3}
+.fourSixTimer .timerNext,.hybridTimer .timerNext,.fiveTimer .timerNext{margin-top:7px;line-height:1.3}
 
 #cafePourCard{
   min-height:160px;
