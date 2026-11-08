@@ -1,9 +1,9 @@
-const CACHE='brew46-v39';
+const CACHE='brew46-v40';
 const ASSETS=[
   './',
   './index.html',
   './grinder.html',
-  './theme.css?v=33',
+  './theme.css?v=34',
   './coffee-icons.svg',
   './timer-bg.webp',
   './footer-banner.webp?v=31',

@@ -67,6 +67,7 @@ button{
 }
 .modeBtn.active:before,.modeBtn.active+.modeBtn:before{opacity:0}
 .modeBtn:disabled{opacity:.58;cursor:not-allowed}
+.modeBtn .twoLine{display:inline-block;white-space:nowrap;line-height:1.22}
 .hybridModeBtn{font-size:11.5px;line-height:1.22}
 
 .card,.timer{
@@ -207,6 +208,7 @@ button{
   justify-content:center;
 }
 .fourSixTimer .actions,.sevenTimer .actions,.hybridTimer .actions,.fiveTimer .actions{margin-top:0;transform:translateY(12px)}
+.hybridTimer .timerNext,.fiveTimer .timerNext{margin-top:7px;line-height:1.3}
 
 #cafePourCard{
   min-height:160px;

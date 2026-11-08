@@ -12,15 +12,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest?v=19">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
-<link rel="stylesheet" href="./theme.css?v=33">
+<link rel="stylesheet" href="./theme.css?v=34">
 </head>
 <body>
 <main class="wrap">
   <nav class="modeSwitch" aria-label="抽出レシピ切替">
-    <button class="modeBtn active" data-mode="46">4：6メソッド</button>
+    <button class="modeBtn active" data-mode="46"><span class="twoLine">4：6<br>メソッド</span></button>
     <button class="modeBtn" data-mode="seven">7投式</button>
     <button class="modeBtn" data-mode="five">5投式</button>
-    <button class="modeBtn hybridModeBtn" data-mode="hybrid">ニュー<br>ハイブリッド</button>
+    <button class="modeBtn hybridModeBtn" data-mode="hybrid"><span class="twoLine">ニュー<br>ハイブリッド</span></button>
     <button class="modeBtn" data-mode="cafe">カフェオレ</button>
   </nav>
 
@@ -769,7 +769,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=39').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=40').catch(()=>{}));
 }
 </script>
 </body>
