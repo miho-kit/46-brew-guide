@@ -29,7 +29,7 @@ button{
 
 .modeSwitch{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(5,1fr);
   gap:4px;
   position:relative;
   overflow:hidden;
@@ -199,14 +199,14 @@ button{
 .actions .primary:before{content:'▶';margin-right:7px;color:#4a2b1b;font-size:9px}
 .actions button:disabled{background:rgba(255,250,243,.66);color:#bdafa4;box-shadow:none}
 .actions .primary:disabled:before{opacity:.5}
-.fourSixTimer,.sevenTimer,.hybridTimer{
+.fourSixTimer,.sevenTimer,.hybridTimer,.fiveTimer{
   min-height:160px;
   height:160px;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
-.fourSixTimer .actions,.sevenTimer .actions,.hybridTimer .actions{margin-top:0;transform:translateY(12px)}
+.fourSixTimer .actions,.sevenTimer .actions,.hybridTimer .actions,.fiveTimer .actions{margin-top:0;transform:translateY(12px)}
 
 #cafePourCard{
   min-height:160px;
@@ -263,9 +263,9 @@ button{
   white-space:nowrap;
 }
 .recipe.sevenRecipe,.recipe.cafeRecipe{grid-template-columns:auto 1fr}
-.recipe.hybridRecipe{grid-template-columns:auto 1fr auto}
-.recipe.sevenRecipe .recipeLabel,.recipe.hybridRecipe .recipeLabel{font-size:0}
-.recipe.sevenRecipe .recipeLabel:after,.recipe.hybridRecipe .recipeLabel:after{
+.recipe.hybridRecipe,.recipe.fiveRecipe{grid-template-columns:auto 1fr auto}
+.recipe.sevenRecipe .recipeLabel,.recipe.hybridRecipe .recipeLabel,.recipe.fiveRecipe .recipeLabel{font-size:0}
+.recipe.sevenRecipe .recipeLabel:after,.recipe.hybridRecipe .recipeLabel:after,.recipe.fiveRecipe .recipeLabel:after{
   content:'抽出ポイント';
   color:#654a39;
   font-size:12.5px;
@@ -283,8 +283,8 @@ button{
   line-height:1.42;
 }
 .recipe.sevenRecipe .recipeStyle b{color:#4a2b1b;font-weight:700}
-.recipe.hybridRecipe .recipeStyle{color:#654a39;font-size:11.5px;font-weight:700;white-space:nowrap}
-.recipe.hybridRecipe .recipeMeta{font-size:17px}
+.recipe.hybridRecipe .recipeStyle,.recipe.fiveRecipe .recipeStyle{color:#654a39;font-size:11.5px;font-weight:700;white-space:nowrap}
+.recipe.hybridRecipe .recipeMeta,.recipe.fiveRecipe .recipeMeta{font-size:17px}
 .recipe.cafeRecipe .recipeStyle{
   color:#654a39;
   font-size:12px;
@@ -419,9 +419,10 @@ button{
 .hybridSteps{display:grid;gap:4px;color:#5b4233;font-size:11px}
 .hybridStep{display:grid;grid-template-columns:36px 1fr;gap:7px;align-items:baseline}
 .hybridStep b{font-family:var(--serif);font-size:11.5px;font-variant-numeric:tabular-nums}
-.hybridBeans{margin-bottom:7px}
-.hybridGrind{margin:6px 2px 0}
-.hybridGrind .compareBtn{min-height:27px;padding:3px 10px}
+.hybridBeans,.fiveBeans{margin-bottom:7px}
+.hybridGrind,.fiveGrind{margin:6px 2px 0}
+.hybridGrind .compareBtn,.fiveGrind .compareBtn{min-height:27px;padding:3px 10px}
+.fiveInfoGrid .infoValue{font-size:16px}
 .hybridInfoGrid .infoValue{font-size:16px}
 .hybridInfoGrid .infoItem:first-child .infoValue{font-family:var(--sans);font-size:12px}
 .note{margin:5px 0 0;color:var(--muted);font-size:10.5px}
@@ -433,7 +434,7 @@ button{
 .calcValue{margin-top:2px;color:var(--deep);font-family:var(--serif);font-size:20px;font-weight:700}
 
 #settings46{min-height:438px}
-#settingsSeven,#settingsCafe,#settingsHybrid{min-height:395px}
+#settingsSeven,#settingsCafe,#settingsHybrid,#settingsFive{min-height:395px}
 #settingsSeven .infoGrid>.infoItem.wide:last-child{
   display:grid;
   grid-template-columns:auto auto auto 1fr;
@@ -487,7 +488,7 @@ button{
   .dot{width:6px;height:6px}
   .readout{gap:8px}
   .timerStep{font-size:13.5px}
-  .fourSixTimer .timerStep,.sevenTimer .timerStep{font-size:14px}
+  .fourSixTimer .timerStep,.sevenTimer .timerStep,.fiveTimer .timerStep{font-size:14px}
   .hybridTimer .timerStep{font-size:12px}
   .hybridTimer .timerAmount{font-size:34px}
   .timerNext{font-size:10.5px}
@@ -499,10 +500,10 @@ button{
   .recipeStyle{font-size:11.5px}
   .recipeMeta{font-size:18px}
   .recipe.sevenRecipe .recipeStyle,.recipe.cafeRecipe .recipeStyle{font-size:11.5px}
-  .recipe.hybridRecipe{gap:6px}
-  .recipe.hybridRecipe .recipeLabel:after{font-size:11px}
-  .recipe.hybridRecipe .recipeStyle{font-size:10.5px}
-  .recipe.hybridRecipe .recipeMeta{font-size:15px}
+  .recipe.hybridRecipe,.recipe.fiveRecipe{gap:6px}
+  .recipe.hybridRecipe .recipeLabel:after,.recipe.fiveRecipe .recipeLabel:after{font-size:11px}
+  .recipe.hybridRecipe .recipeStyle,.recipe.fiveRecipe .recipeStyle{font-size:10.5px}
+  .recipe.hybridRecipe .recipeMeta,.recipe.fiveRecipe .recipeMeta{font-size:15px}
   .recipe.sevenRecipe .recipeStyle{gap:5px}
   .settings,.fixedSettings{padding:10px 10px 11px}
   .block h2,.cafeSectionTitle{font-size:13.5px}
@@ -529,7 +530,7 @@ button{
   #settings46 .block h2{margin-bottom:6px}
   #settings46 .grind{margin-top:6px}
   #settings46 details,#settingsSeven details,#settingsHybrid details{margin-top:6px;padding-top:5px}
-  #settingsSeven,#settingsCafe,#settingsHybrid{min-height:364px}
+  #settingsSeven,#settingsCafe,#settingsHybrid,#settingsFive{min-height:364px}
   #settingsSeven .infoGrid>.infoItem.wide:last-child{padding:5px 9px;column-gap:7px;row-gap:0}
   #settingsSeven .infoGrid>.infoItem.wide:last-child .infoCompare{min-height:25px;padding:2px 8px;font-size:10px}
   #settingsSeven .infoGrid>.infoItem.wide:last-child .infoSub{font-size:10px}
@@ -539,14 +540,14 @@ button{
   .timer{padding-top:9px}
   .dots{top:15px}
   #settings46{min-height:367px}
-  #settingsSeven,#settingsCafe,#settingsHybrid{min-height:352px}
+  #settingsSeven,#settingsCafe,#settingsHybrid,#settingsFive{min-height:352px}
 }
 @media(max-width:360px){
   .timerAmount{font-size:34px}
   .clock{font-size:28px}
   .timeline{font-size:10px;letter-spacing:-.02em}
-  .recipe.hybridRecipe .recipeLabel:after{content:'ポイント'}
-  .recipe.hybridRecipe .recipeStyle{font-size:10px}
-  .recipe.hybridRecipe .recipeMeta{font-size:14px}
+  .recipe.hybridRecipe .recipeLabel:after,.recipe.fiveRecipe .recipeLabel:after{content:'ポイント'}
+  .recipe.hybridRecipe .recipeStyle,.recipe.fiveRecipe .recipeStyle{font-size:10px}
+  .recipe.hybridRecipe .recipeMeta,.recipe.fiveRecipe .recipeMeta{font-size:14px}
   .choice{min-height:43px}
 }

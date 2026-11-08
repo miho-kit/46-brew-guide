@@ -12,13 +12,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest?v=19">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
-<link rel="stylesheet" href="./theme.css?v=32">
+<link rel="stylesheet" href="./theme.css?v=33">
 </head>
 <body>
 <main class="wrap">
   <nav class="modeSwitch" aria-label="抽出レシピ切替">
     <button class="modeBtn active" data-mode="46">4：6メソッド</button>
     <button class="modeBtn" data-mode="seven">7投式</button>
+    <button class="modeBtn" data-mode="five">5投式</button>
     <button class="modeBtn hybridModeBtn" data-mode="hybrid">ニュー<br>ハイブリッド</button>
     <button class="modeBtn" data-mode="cafe">カフェオレ</button>
   </nav>
@@ -128,6 +129,23 @@
     </details>
   </section>
 
+  <section class="card fixedSettings hidden" id="settingsFive">
+    <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
+    <div class="grid2 fiveBeans" id="fiveBeans">
+      <button class="choice bean active" data-v="15"><span class="beanMain">15g</span><span class="beanWater">255g</span></button>
+      <button class="choice bean" data-v="20"><span class="beanMain">20g</span><span class="beanWater">340g</span></button>
+    </div>
+    <div class="infoGrid fiveInfoGrid">
+      <div class="infoItem"><div class="infoLabel">湯温</div><div class="infoValue">96℃</div></div>
+      <div class="infoItem"><div class="infoLabel">豆：お湯</div><div class="infoValue">1：17</div></div>
+    </div>
+    <div class="grind fiveGrind"><span>挽き目：中細挽き・コマンダンテ21クリック</span><a class="compareBtn" href="./grinder.html">クリック比較表</a></div>
+    <div class="timelineWrap fiveTimeline">
+      <div class="timelineLabel">注湯タイミング</div>
+      <div class="hybridSteps" id="fiveSteps"></div>
+    </div>
+  </section>
+
   <section class="card fixedSettings hidden" id="settingsHybrid">
     <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
     <div class="grid2 hybridBeans" id="hybridBeans">
@@ -192,6 +210,7 @@ const S={
   share:50,
   cafeBeans:15,
   hybridBeans:20,
+  fiveBeans:15,
   milkRatio:'4:6',
   elapsed:0,
   running:false,
@@ -214,6 +233,22 @@ const T7=[0,20,40,60,80,100,120];
 const HYBRID_TIMES={
   15:[0,35,85,100,125,160],
   20:[0,40,90,105,130,165]
+};
+const FIVE_RECIPES={
+  15:[
+    {time:0,pour:38,cumulative:38,note:'しっかりスピン'},
+    {time:30,pour:82,cumulative:120},
+    {time:60,pour:30,cumulative:150},
+    {time:80,pour:47,cumulative:197},
+    {time:100,pour:58,cumulative:255,note:'軽くスピン'}
+  ],
+  20:[
+    {time:0,pour:50,cumulative:50,note:'しっかりスピン'},
+    {time:30,pour:110,cumulative:160},
+    {time:60,pour:40,cumulative:200},
+    {time:80,pour:63,cumulative:263},
+    {time:100,pour:77,cumulative:340,note:'軽くスピン'}
+  ]
 };
 
 const $=selector=>document.querySelector(selector);
@@ -246,6 +281,21 @@ function renderHybridTimeline(){
   `).join('')+`<div class="hybridStep"><b>${stepClock(finish)}</b><span>ドリッパーを外して完成</span></div>`;
 }
 
+function makeFiveRecipe(){
+  return FIVE_RECIPES[S.fiveBeans].map((step,index)=>({
+    ...step,
+    label:`${index+1}投目`,
+    amount:`${step.pour}g`,
+    next:`累計${step.cumulative}g${step.note?`・${step.note}`:''}`
+  }));
+}
+
+function renderFiveTimeline(){
+  $('#fiveSteps').innerHTML=S.recipe.map(step=>`
+    <div class="hybridStep"><b>${stepClock(step.time)}</b><span>${step.pour}g（累計${step.cumulative}g）${step.note?`・${step.note}`:''}</span></div>
+  `).join('')+'<div class="hybridStep"><b>2:45</b><span>落とし切り</span></div>';
+}
+
 function active(id,value){
   $$(`#${id} .choice`).forEach(button=>{
     button.classList.toggle('active',button.dataset.v==value);
@@ -253,7 +303,7 @@ function active(id,value){
 }
 
 function lockSettings(locked){
-  $$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,#hybridBeans .choice,.modeBtn')
+  $$('#beans .choice,#roasts .choice,#flavors .choice,#strengthChoices .choice,#cafeBeans .choice,#hybridBeans .choice,#fiveBeans .choice,.modeBtn')
     .forEach(element=>{element.disabled=locked});
 }
 
@@ -312,14 +362,17 @@ function setMode(mode){
   });
   $('#timerSection').classList.toggle('hidden',mode==='cafe');
   $('#timerSection').classList.toggle('sevenTimer',mode==='seven');
+  $('#timerSection').classList.toggle('fiveTimer',mode==='five');
   $('#timerSection').classList.toggle('fourSixTimer',mode==='46');
   $('#timerSection').classList.toggle('hybridTimer',mode==='hybrid');
   $('#cafePourCard').classList.toggle('hidden',mode!=='cafe');
   $('.recipe').classList.toggle('sevenRecipe',mode==='seven');
+  $('.recipe').classList.toggle('fiveRecipe',mode==='five');
   $('.recipe').classList.toggle('cafeRecipe',mode==='cafe');
   $('.recipe').classList.toggle('hybridRecipe',mode==='hybrid');
   $('#settings46').classList.toggle('hidden',mode!=='46');
   $('#settingsSeven').classList.toggle('hidden',mode!=='seven');
+  $('#settingsFive').classList.toggle('hidden',mode!=='five');
   $('#settingsHybrid').classList.toggle('hidden',mode!=='hybrid');
   $('#settingsCafe').classList.toggle('hidden',mode!=='cafe');
 
@@ -344,6 +397,14 @@ function build(){
     $('#water').textContent='210g';
     $('#temp').textContent='90→75℃';
     $('#summary').innerHTML='<b>4投目まで 90℃</b><b>5投目から 75℃</b>';
+  }else if(S.mode==='five'){
+    showRecipeTemp(true);
+    S.recipe=makeFiveRecipe();
+    $('#water').textContent=`${S.fiveBeans*17}g`;
+    $('#temp').textContent='96℃';
+    $('#summary').textContent='浅煎りを甘く';
+    active('fiveBeans',S.fiveBeans);
+    renderFiveTimeline();
   }else if(S.mode==='hybrid'){
     showRecipeTemp(true);
     S.recipe=makeHybridRecipe();
@@ -406,6 +467,7 @@ function clock(ms){
 function endMs(){
   if(!S.recipe.length)return 0;
   if(S.mode==='hybrid'&&S.hybridBeans===15)return 180000;
+  if(S.mode==='five')return 165000;
   const drainTime=S.mode==='46'?(S.beans===15?40:50):45;
   return(S.recipe.at(-1).time+drainTime)*1000;
 }
@@ -488,7 +550,7 @@ function view(effect=true){
     if(seconds>=S.recipe[i].time)index=i;
   }
 
-  if((S.mode==='46'||S.mode==='hybrid')&&S.elapsed>=endMs()){
+  if((S.mode==='46'||S.mode==='hybrid'||S.mode==='five')&&S.elapsed>=endMs()){
     if(S.running){
       finish();
     }else{
@@ -519,7 +581,7 @@ function view(effect=true){
       $('#timerNext').textContent=index<S.recipe.length-1
         ?`次：${index+2}投目・${fmt(S.recipe[index+1].amount)}g`
         :'次：抽出完了';
-    }else if(S.mode==='hybrid'){
+    }else if(S.mode==='hybrid'||S.mode==='five'){
       const step=S.recipe[index];
       $('#timerStep').textContent=step.label;
       $('#timerAmount').textContent=step.amount;
@@ -543,7 +605,7 @@ function view(effect=true){
 function start(){
   if(S.mode==='cafe'||S.running)return;
 
-  if((S.mode==='46'||S.mode==='hybrid')&&S.elapsed>=endMs()){
+  if((S.mode==='46'||S.mode==='hybrid'||S.mode==='five')&&S.elapsed>=endMs()){
     S.elapsed=0;
     S.last=0;
   }
@@ -657,6 +719,14 @@ $$('#cafeBeans .choice').forEach(button=>{
     alignFooter();
   };
 });
+$$('#fiveBeans .choice').forEach(button=>{
+  button.onclick=()=>{
+    S.fiveBeans=+button.dataset.v;
+    reset();
+    build();
+    alignFooter();
+  };
+});
 $$('#hybridBeans .choice').forEach(button=>{
   button.onclick=()=>{
     S.hybridBeans=+button.dataset.v;
@@ -699,7 +769,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=37').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=38').catch(()=>{}));
 }
 </script>
 </body>
