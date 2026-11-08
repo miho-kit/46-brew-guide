@@ -149,8 +149,8 @@
   <section class="card fixedSettings hidden" id="settingsHybrid">
     <p class="cafeSectionTitle"><svg class="icon" aria-hidden="true"><use href="./coffee-icons.svg#scale"></use></svg>抽出レシピ</p>
     <div class="grid2 hybridBeans" id="hybridBeans">
-      <button class="choice bean" data-v="15"><span class="beanMain">15g</span><span class="beanWater">225g</span></button>
-      <button class="choice bean active" data-v="20"><span class="beanMain">20g</span><span class="beanWater">300g</span></button>
+      <button class="choice bean active" data-v="15"><span class="beanMain">15g</span><span class="beanWater">225g</span></button>
+      <button class="choice bean" data-v="20"><span class="beanMain">20g</span><span class="beanWater">300g</span></button>
     </div>
     <div class="infoGrid hybridInfoGrid">
       <div class="infoItem"><div class="infoLabel">ドリッパー</div><div class="infoValue">HARIO SWITCH</div></div>
@@ -209,7 +209,7 @@ const S={
   strength:2,
   share:50,
   cafeBeans:15,
-  hybridBeans:20,
+  hybridBeans:15,
   fiveBeans:15,
   milkRatio:'4:6',
   elapsed:0,
@@ -769,7 +769,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=38').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=39').catch(()=>{}));
 }
 </script>
 </body>
