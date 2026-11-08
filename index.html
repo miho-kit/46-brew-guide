@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.webmanifest?v=19">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=19">
-<link rel="stylesheet" href="./theme.css?v=31">
+<link rel="stylesheet" href="./theme.css?v=32">
 </head>
 <body>
 <main class="wrap">
@@ -138,6 +138,7 @@
       <div class="infoItem"><div class="infoLabel">ドリッパー</div><div class="infoValue">HARIO SWITCH</div></div>
       <div class="infoItem"><div class="infoLabel">後半の湯温</div><div class="infoValue">70℃</div></div>
     </div>
+    <div class="grind hybridGrind"><span>挽き目：コマンダンテ28クリック</span><a class="compareBtn" href="./grinder.html">クリック比較表</a></div>
     <div class="timelineWrap hybridTimeline">
       <div class="timelineLabel">抽出タイミング</div>
       <div class="hybridSteps" id="hybridSteps"></div>
@@ -698,7 +699,7 @@ window.addEventListener('resize',()=>{
 });
 
 if('serviceWorker' in navigator){
-  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=36').catch(()=>{}));
+  addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=37').catch(()=>{}));
 }
 </script>
 </body>
